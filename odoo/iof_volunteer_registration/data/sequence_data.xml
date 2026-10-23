@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="seq_iof_volunteer_registration" model="ir.sequence">
+        <field name="name">IOF Volunteer Registration</field>
+        <field name="code">iof.volunteer.registration</field>
+        <field name="prefix">IOF-VOL-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

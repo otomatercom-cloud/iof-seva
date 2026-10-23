@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="interest_community_service" model="iof.volunteer.interest">
+        <field name="name">Community Service</field><field name="code">community_service</field><field name="sequence">1</field>
+    </record>
+    <record id="interest_blood_donation" model="iof.volunteer.interest">
+        <field name="name">Blood Donation Campaigns</field><field name="code">blood_donation</field><field name="sequence">2</field>
+    </record>
+    <record id="interest_education" model="iof.volunteer.interest">
+        <field name="name">Educational Programs</field><field name="code">education</field><field name="sequence">3</field>
+    </record>
+    <record id="interest_cultural" model="iof.volunteer.interest">
+        <field name="name">Cultural Events</field><field name="code">cultural</field><field name="sequence">4</field>
+    </record>
+    <record id="interest_youth" model="iof.volunteer.interest">
+        <field name="name">Youth Activities</field><field name="code">youth</field><field name="sequence">5</field>
+    </record>
+    <record id="interest_women" model="iof.volunteer.interest">
+        <field name="name">Women's Empowerment Programs</field><field name="code">women_empowerment</field><field name="sequence">6</field>
+    </record>
+    <record id="interest_medical" model="iof.volunteer.interest">
+        <field name="name">Medical Support Activities</field><field name="code">medical_support</field><field name="sequence">7</field>
+    </record>
+    <record id="interest_disaster" model="iof.volunteer.interest">
+        <field name="name">Disaster Relief &amp; Emergency Assistance</field><field name="code">disaster_relief</field><field name="sequence">8</field>
+    </record>
+    <record id="interest_event_mgmt" model="iof.volunteer.interest">
+        <field name="name">Event Management</field><field name="code">event_management</field><field name="sequence">9</field>
+    </record>
+    <record id="interest_digital" model="iof.volunteer.interest">
+        <field name="name">Social Media &amp; Digital Support</field><field name="code">digital_support</field><field name="sequence">10</field>
+    </record>
+    <record id="interest_fundraising" model="iof.volunteer.interest">
+        <field name="name">Fundraising Activities</field><field name="code">fundraising</field><field name="sequence">11</field>
+    </record>
+    <record id="interest_other" model="iof.volunteer.interest">
+        <field name="name">Other (Specify)</field><field name="code">other</field><field name="sequence">12</field>
+    </record>
+</odoo>

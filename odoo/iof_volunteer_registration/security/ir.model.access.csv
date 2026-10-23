@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_iof_reg_user,iof.volunteer.registration user,model_iof_volunteer_registration,group_iof_volunteer_user,1,1,1,0
+access_iof_reg_manager,iof.volunteer.registration manager,model_iof_volunteer_registration,group_iof_volunteer_manager,1,1,1,1
+access_iof_interest_user,iof.volunteer.interest user,model_iof_volunteer_interest,group_iof_volunteer_user,1,0,0,0
+access_iof_interest_manager,iof.volunteer.interest manager,model_iof_volunteer_interest,group_iof_volunteer_manager,1,1,1,1
