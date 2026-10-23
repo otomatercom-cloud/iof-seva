@@ -24,11 +24,20 @@ const defaults: VolunteerRegistration = {
 
 const newKey = () => crypto.randomUUID();
 
-function SectionCard({ title, children }: { title: string; children: React.ReactNode }) {
+const CONFETTI = Array.from({ length: 18 }, (_, i) => ({
+  left: `${4 + i * 5.3}%`,
+  color: ["#d24e0a", "#166534", "#0b2545", "#ff9a5c", "#4ade80"][i % 5],
+  delay: `${((i * 0.37) % 3).toFixed(2)}s`,
+}));
+
+function SectionCard({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
-    <fieldset className="rounded-2xl border border-slate-200 p-5 sm:p-6">
-      <legend className="px-2 text-lg font-bold text-navy-900">{title}</legend>
-      <div className="mt-2 grid gap-5 sm:grid-cols-2">{children}</div>
+    <fieldset className="min-w-0">
+      <legend className="flex items-center gap-3 text-xl font-extrabold text-navy-900">
+        <span className="inline-flex size-8 items-center justify-center rounded-full bg-navy-900 text-sm text-white" aria-hidden>{n}</span>
+        {title}
+      </legend>
+      <div className="mt-5 grid gap-5 sm:grid-cols-2">{children}</div>
     </fieldset>
   );
 }
@@ -89,16 +98,30 @@ export function VolunteerForm() {
 
   if (reference) {
     return (
-      <Card className="mx-auto max-w-2xl text-center sm:p-10" role="status" aria-live="polite">
-        <CheckCircle2 className="mx-auto size-14 text-seva-700" aria-hidden />
-        <h2 className="mt-4 text-2xl">Registration received</h2>
-        <p className="mt-3 text-slate-600">
+      <Card className="relative mx-auto max-w-2xl overflow-hidden rounded-[2rem] text-center hover:translate-y-0 sm:p-14" role="status" aria-live="polite">
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          {CONFETTI.map((c, i) => (
+            <span key={i} className="confetti" style={{ left: c.left, background: c.color, animationDelay: c.delay }} />
+          ))}
+        </div>
+        <div className="relative mx-auto size-24">
+          <span className="anim-ring absolute inset-0 rounded-full bg-seva-50" />
+          <span className="anim-pop relative flex size-24 items-center justify-center rounded-full bg-seva-700 text-white">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path className="anim-tick" d="M5 12.5l4.5 4.5L19 7.5" />
+            </svg>
+          </span>
+        </div>
+        <h2 className="anim-up delay-1 relative mt-8 text-4xl">Registration received</h2>
+        <p className="anim-up delay-2 relative mt-4 text-slate-600">
           Thank you for your interest in volunteering with India Overseas Forum. Your registration has been received
           successfully. Please keep your registration reference for future communication.
         </p>
-        <p className="mt-6 text-sm text-slate-500">Your registration reference</p>
-        <p data-testid="reference" className="mt-1 text-3xl font-bold tracking-wide text-navy-900">{reference}</p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="anim-up delay-3 relative mx-auto mt-8 max-w-sm rounded-3xl border-2 border-dashed border-navy-700/30 bg-navy-50 p-6">
+          <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Your registration reference</p>
+          <p data-testid="reference" className="mt-2 text-4xl font-extrabold tracking-wide text-navy-900">{reference}</p>
+        </div>
+        <div className="relative mt-8 flex flex-wrap justify-center gap-3">
           <ButtonLink href="/" variant="secondary">Back to home</ButtonLink>
           <Button type="button" variant="ghost" onClick={() => setReference(null)}>Register another volunteer</Button>
         </div>
@@ -107,12 +130,12 @@ export function VolunteerForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="mx-auto max-w-4xl space-y-6" aria-label="Volunteer registration">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-10 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_40px_70px_-40px_rgba(11,37,69,.35)] sm:p-11" aria-label="Volunteer registration">
       <p className="text-sm text-slate-500"><span className="text-red-700">*</span> Required field</p>
 
       {banner && <Alert tone="error" title="Registration not saved">{banner}</Alert>}
 
-      <SectionCard title="Personal details">
+      <SectionCard n={1} title="Personal details">
         <TextField label="First name" required autoComplete="given-name" error={err("first_name")} {...register("first_name")} />
         <TextField label="Last name" required autoComplete="family-name" error={err("last_name")} {...register("last_name")} />
         <SelectField label="Gender" options={GENDERS} error={err("gender")} {...register("gender")} />
@@ -122,7 +145,7 @@ export function VolunteerForm() {
         <SelectField label="City in Saudi Arabia" options={SAUDI_CITIES} error={err("saudi_city")} {...register("saudi_city")} />
       </SectionCard>
 
-      <SectionCard title="Contact details">
+      <SectionCard n={2} title="Contact details">
         <TextField label="Mobile number" required type="tel" autoComplete="tel" placeholder="+966 5X XXX XXXX"
           hint="Include the country code" error={err("mobile")} {...register("mobile")} />
         <TextField label="WhatsApp number" type="tel" placeholder="+966 5X XXX XXXX" error={err("whatsapp")} {...register("whatsapp")} />
@@ -135,13 +158,13 @@ export function VolunteerForm() {
         <TextField label="Region/Province" error={err("region")} {...register("region")} />
       </SectionCard>
 
-      <SectionCard title="Professional background">
+      <SectionCard n={3} title="Professional background">
         <TextField label="Occupation" error={err("occupation")} {...register("occupation")} />
         <TextField label="Company/Organization name" error={err("organization")} {...register("organization")} />
         <TextField label="Educational qualification" error={err("qualification")} {...register("qualification")} />
       </SectionCard>
 
-      <SectionCard title="Volunteering">
+      <SectionCard n={4} title="Volunteering">
         <div className="sm:col-span-2">
           <Controller
             control={control}
@@ -173,14 +196,18 @@ export function VolunteerForm() {
         </div>
       </SectionCard>
 
-      <SectionCard title="Emergency contact">
+      <SectionCard n={5} title="Emergency contact">
         <TextField label="Emergency contact name" error={err("emergency_name")} {...register("emergency_name")} />
         <TextField label="Relationship" error={err("emergency_relationship")} {...register("emergency_relationship")} />
         <TextField label="Emergency contact number" type="tel" placeholder="+966 5X XXX XXXX" error={err("emergency_phone")} {...register("emergency_phone")} />
       </SectionCard>
 
-      <fieldset className="rounded-2xl border border-slate-200 bg-navy-50/50 p-5 sm:p-6">
-        <legend className="px-2 text-lg font-bold text-navy-900">Declaration &amp; consent</legend>
+      <fieldset className="min-w-0">
+        <legend className="flex items-center gap-3 text-xl font-extrabold text-navy-900">
+          <span className="inline-flex size-8 items-center justify-center rounded-full bg-navy-900 text-sm text-white" aria-hidden>6</span>
+          Declaration &amp; consent
+        </legend>
+        <div className="mt-5 rounded-2xl bg-navy-50 p-6">
         <p className="text-sm leading-relaxed text-slate-700">
           I hereby confirm that the information provided is true and accurate. I voluntarily agree to participate in IOF
           Seva activities and consent to being contacted regarding volunteer opportunities, events, and community
@@ -192,6 +219,7 @@ export function VolunteerForm() {
           <span>I Agree <span className="text-red-700" aria-hidden>*</span><span className="sr-only">(required)</span></span>
         </label>
         {errors.consent && <p className="mt-2 text-xs font-medium text-red-700">{err("consent")}</p>}
+        </div>
       </fieldset>
 
       {/* Honeypot: invisible to people, tempting to bots. */}
@@ -201,7 +229,7 @@ export function VolunteerForm() {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting} className="min-w-52">
+        <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting} className="btn-lift anim-pulse min-w-52 px-9 py-4 text-base">
           {isSubmitting ? (<><Loader2 className="size-4 animate-spin" aria-hidden /> Submitting…</>) : "Register as a Volunteer"}
         </Button>
         <Button type="button" variant="ghost" disabled={isSubmitting} onClick={() => { reset(defaults); setBanner(null); idempotencyKey.current = null; }}>

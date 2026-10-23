@@ -4,7 +4,7 @@ import { useId, type ComponentProps, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const control =
-  "block w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm transition " +
+  "block w-full rounded-[14px] border-[1.5px] bg-white px-4 py-3 text-sm text-slate-900 shadow-sm transition " +
   "placeholder:text-slate-400 focus:border-navy-700 focus:outline-none focus:ring-2 focus:ring-navy-700/30";
 
 type Common = { label: string; error?: string; hint?: string; required?: boolean };
@@ -89,24 +89,32 @@ export function CheckboxGroup({ legend, options, value, onChange, error, columns
 }) {
   return (
     <fieldset>
-      <legend className="mb-2 text-sm font-medium text-navy-900">{legend}</legend>
-      <div className={cn("grid gap-2", columns === 2 && "sm:grid-cols-2")}>
+      <legend className="mb-3 text-sm font-medium text-navy-900">
+        {legend} <span className="font-normal text-slate-500">({value.length} selected)</span>
+      </legend>
+      <div className={cn("flex flex-wrap gap-2.5", columns === 1 && "flex-col items-stretch sm:flex-row")}>
         {options.map(([key, text]) => {
           const checked = value.includes(key);
           return (
             <label
               key={key}
               className={cn(
-                "flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-2.5 text-sm transition",
-                checked ? "border-navy-700 bg-navy-50" : "border-slate-200 hover:border-slate-300",
+                "relative inline-flex cursor-pointer items-center gap-2 rounded-full border-[1.5px] px-5 py-3 text-sm font-semibold transition",
+                "hover:-translate-y-0.5 hover:border-navy-700 focus-within:outline focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-saffron-600",
+                checked ? "border-navy-900 bg-navy-900 text-white" : "border-slate-300 bg-white text-slate-700",
               )}
             >
               <input
                 type="checkbox"
                 checked={checked}
                 onChange={() => onChange(checked ? value.filter((v) => v !== key) : [...value, key])}
-                className="size-4 accent-[var(--color-navy-900)]"
+                className="sr-only"
               />
+              {checked && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M5 12l5 5 10-10" />
+                </svg>
+              )}
               {text}
             </label>
           );

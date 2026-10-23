@@ -1,18 +1,17 @@
 import {
-  Collaboration, ContactStrip, FeaturedSeva, Hero, Impact, Intro, Pillars, ReportsPreview, VolunteerCta,
+  CollabAndReports, ContactStrip, Hero, Impact, Intro, Marquee, Pillars, VolunteerCta,
 } from "@/components/sections/home";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
+      <Marquee />
       <Intro />
       <Pillars />
-      <FeaturedSeva />
       <Impact />
       <VolunteerCta />
-      <Collaboration />
-      <ReportsPreview />
+      <CollabAndReports />
       <ContactStrip />
     </>
   );
