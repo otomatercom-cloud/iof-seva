@@ -8,7 +8,7 @@ import type { SubmitFailure } from "@/types/volunteer-registration";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const MAX_BODY = 64 * 1024;
+const MAX_BODY = 640 * 1024;
 const KEY_RE = /^[A-Za-z0-9_-]{16,64}$/;
 
 const fail = (status: number, body: SubmitFailure, extra?: HeadersInit) =>

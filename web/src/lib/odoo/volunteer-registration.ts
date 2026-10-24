@@ -13,7 +13,7 @@ export function toOdooPayload(v: VolunteerRegistration) {
     other_interest: v.other_interest, special_skills: v.special_skills, experience: v.experience,
     languages: v.languages, availability: v.availability, hours_per_month: v.hours_per_month,
     emergency_name: v.emergency_name, emergency_relationship: v.emergency_relationship,
-    emergency_phone: v.emergency_phone, consent: v.consent,
+    emergency_phone: v.emergency_phone, consent: v.consent, photo: v.photo || undefined,
   };
 }
 

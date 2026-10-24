@@ -12,6 +12,7 @@ import {
   AVAILABILITY, GENDERS, INTERESTS, SAUDI_CITIES, volunteerRegistrationSchema,
   type VolunteerRegistration,
 } from "@/lib/validation/volunteer-registration";
+import { PhotoField } from "@/components/ui/photo-field";
 import type { SubmitResult } from "@/types/volunteer-registration";
 
 const defaults: VolunteerRegistration = {
@@ -19,7 +20,7 @@ const defaults: VolunteerRegistration = {
   saudi_city: "", mobile: "", whatsapp: "", email: "", address: "", city: "", region: "",
   occupation: "", organization: "", qualification: "", interests: [], other_interest: "",
   special_skills: "", experience: "", languages: "", availability: [], hours_per_month: "",
-  emergency_name: "", emergency_relationship: "", emergency_phone: "", consent: false as unknown as true,
+  emergency_name: "", emergency_relationship: "", emergency_phone: "", consent: false as unknown as true, photo: "",
 };
 
 const newKey = () => crypto.randomUUID();
@@ -115,7 +116,7 @@ export function VolunteerForm() {
         <h2 className="anim-up delay-1 relative mt-8 text-4xl">Registration received</h2>
         <p className="anim-up delay-2 relative mt-4 text-slate-600">
           Thank you for your interest in volunteering with India Overseas Forum. Your registration has been received
-          successfully. Please keep your registration reference for future communication.
+          successfully. Keep your reference. Once IOF approves your registration, your digital volunteer ID card (PDF with QR) will be emailed to you.
         </p>
         <div className="anim-up delay-3 relative mx-auto mt-8 max-w-sm rounded-3xl border-2 border-dashed border-navy-700/30 bg-navy-50 p-6">
           <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Your registration reference</p>
@@ -143,6 +144,9 @@ export function VolunteerForm() {
         <TextField label="Nationality" error={err("nationality")} {...register("nationality")} />
         <TextField label="Iqama number (optional)" error={err("iqama_number")} {...register("iqama_number")} />
         <SelectField label="City in Saudi Arabia" options={SAUDI_CITIES} error={err("saudi_city")} {...register("saudi_city")} />
+        <Controller control={control} name="photo" render={({ field }) => (
+          <PhotoField value={field.value} onChange={field.onChange} error={err("photo")} />
+        )} />
       </SectionCard>
 
       <SectionCard n={2} title="Contact details">

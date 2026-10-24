@@ -11,7 +11,7 @@ from odoo.http import request
 _logger = logging.getLogger(__name__)
 
 TOKEN_PARAM = "iof_volunteer_registration.api_token"
-MAX_BODY_BYTES = 64 * 1024
+MAX_BODY_BYTES = 640 * 1024  # room for an optional <=400KB photo (base64)
 IDEMPOTENCY_RE = re.compile(r"^[A-Za-z0-9_-]{16,64}$")
 
 

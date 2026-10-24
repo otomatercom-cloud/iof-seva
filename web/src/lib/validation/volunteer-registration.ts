@@ -91,6 +91,7 @@ export const volunteerRegistrationSchema = z.object({
   emergency_name: text(120),
   emergency_relationship: text(80),
   emergency_phone: optionalPhone,
+  photo: z.string().max(560_000).regex(/^(data:image\/jpeg;base64,[A-Za-z0-9+/=]+)?$/, "Invalid photo").default(""),
   consent: z.literal(true, { errorMap: () => ({ message: "You must accept the declaration to register" }) }),
 });
 

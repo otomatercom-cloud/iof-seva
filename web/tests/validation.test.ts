@@ -54,3 +54,16 @@ describe("volunteer registration schema", () => {
     expect(submissionSchema.safeParse({ ...valid, website: "" }).success).toBe(true);
   });
 });
+
+import { volunteerRegistrationSchema as _vs } from "@/lib/validation/volunteer-registration";
+describe("photo field", () => {
+  const base = { first_name: "A", last_name: "B", mobile: "+966501234567", email: "a@b.co", consent: true };
+  it("accepts empty and jpeg data URL", () => {
+    expect(_vs.safeParse(base).success).toBe(true);
+    expect(_vs.safeParse({ ...base, photo: "data:image/jpeg;base64,/9j/4AAQ" }).success).toBe(true);
+  });
+  it("rejects non-jpeg / script payloads", () => {
+    expect(_vs.safeParse({ ...base, photo: "data:text/html;base64,PHNjcmlwdD4=" }).success).toBe(false);
+    expect(_vs.safeParse({ ...base, photo: "javascript:alert(1)" }).success).toBe(false);
+  });
+});
