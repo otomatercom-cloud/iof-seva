@@ -81,3 +81,13 @@ class TestVolunteerCard(TransactionCase):
             "name": "c.pdf", "res_model": "association.member", "res_id": rec.member_id.id,
             "raw": b"%PDF-1.4", "mimetype": "application/pdf"})
         self.assertTrue(att.with_user(user).read(["name"]))
+
+    def test_nationality_exact_match_and_card_assets(self):
+        rec = self._make(photo=_jpeg())
+        rec.action_approve()
+        self.assertEqual(rec.member_id.nationality_id, self.env.ref("base.in"))
+        self.assertTrue(rec.member_id._iof_card_qr_uri().startswith("data:image/png;base64,"))
+        report = self.env.ref("association_membership.action_report_membership_card")
+        html = report._render_qweb_html(report.report_name, rec.member_id.ids)[0].decode()
+        self.assertIn("Volunteer Identity Card", html)
+        self.assertIn("data:image/png;base64", html)

@@ -46,7 +46,10 @@ class IofVolunteerRegistration(models.Model):
 
     def _country(self, name):
         Country = self.env["res.country"].sudo()
-        country = name and Country.search([("name", "ilike", name)], limit=1)
+        country = False
+        if name:  # exact match first: "India" must not hit "British Indian Ocean Territory"
+            country = Country.search([("name", "=ilike", name)], limit=1) or Country.search([("code", "=ilike", name)], limit=1)
+            country = country or Country.search([("name", "ilike", name)], limit=1)
         return country or self.env.ref("base.in", raise_if_not_found=False) or Country
 
     def _application_vals(self, mtype):

@@ -7,6 +7,7 @@
     "license": "OPL-1",
     "category": "Customizations",
     "depends": ["iof_volunteer_registration", "association_membership"],
-    "data": ["security/security.xml", "data/membership_type_data.xml", "views/registration_views.xml"],
+    "data": ["security/security.xml", "data/membership_type_data.xml", "report/card_templates.xml", "views/registration_views.xml"],
+    "external_dependencies": {"python": ["qrcode"]},
     "installable": True,
 }

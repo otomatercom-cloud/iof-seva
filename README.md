@@ -29,3 +29,8 @@ Single source of truth for texts is `web/src/content/defaults.ts`; after adding 
 Set `ODOO_PUBLIC_URL` if media must be served from a different URL than `ODOO_BASE_URL`.
 Not editable in Odoo (code): the volunteer form's field labels/validation messages and visual design.
 Install: `-i iof_site_content`. Uploads: images JPG/PNG/WebP/GIF ≤8MB (SVG refused), reports PDF ≤15MB.
+
+### ID card design
+Two-sided CR80 PDF (front: photo, name, Member ID, area, validity; back: QR + verify URL + signature line), navy/saffron/green.
+Needs python `qrcode` (`pip install qrcode`) and wkhtmltopdf (patched-Qt build recommended). Branding text can be set in
+System Parameters: `iof_volunteer_card.org_name`, `iof_volunteer_card.contact`.
