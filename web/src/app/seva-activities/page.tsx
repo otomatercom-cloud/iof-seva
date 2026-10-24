@@ -1,32 +1,33 @@
-import { Droplet, GraduationCap, HeartPulse, LifeBuoy, Utensils } from "lucide-react";
 import type { Metadata } from "next";
 import { PageHero, Section } from "@/components/sections/page-hero";
+import { PhotoGallery } from "@/components/sections/photo-gallery";
 import { ButtonLink, JoinVolunteerButton } from "@/components/ui/button";
 import { FeatureCard } from "@/components/ui/card";
-import { GALLERY } from "@/lib/gallery";
-import { PhotoGallery } from "@/components/sections/photo-gallery";
+import { Icon } from "@/components/ui/icon";
+import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = { title: "Seva Activities" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getContent()).t("nav.seva") };
+}
 
-export default function SevaActivitiesPage() {
-  const i = "size-6";
+export default async function SevaActivitiesPage() {
+  const c = await getContent();
+  const photos = c.items("gallery").map((g) => ({ src: g.image, alt: g.title }));
   return (
     <>
-      <PageHero title="Seva Activities" intro="Service in action: how IOF volunteers support families across Saudi Arabia." />
+      <PageHero title={c.t("seva.title")} intro={c.t("seva.intro")} />
       <Section>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <FeatureCard icon={<Droplet className={i} />} title="Blood Donation">Regular blood donation camps supporting local hospitals and patients.</FeatureCard>
-          <FeatureCard icon={<GraduationCap className={i} />} title="Educational Aid">Scholarships and learning materials for Indian children in Saudi Arabia.</FeatureCard>
-          <FeatureCard icon={<HeartPulse className={i} />} title="Medical Support">Help with medical consultations and emergency healthcare for community members.</FeatureCard>
-          <FeatureCard icon={<LifeBuoy className={i} />} title="Emergency Relief">Quick crisis response, supplying essentials to Indian families affected by emergencies.</FeatureCard>
-          <FeatureCard icon={<Utensils className={i} />} title="Food &amp; Supplies">Food and supplies for families in need across Saudi Arabia.</FeatureCard>
+          {c.items("activities").map((a) => (
+            <FeatureCard key={a.title} icon={<Icon name={a.icon} className="size-6" />} title={a.title}>{a.text}</FeatureCard>
+          ))}
         </div>
       </Section>
-      <Section tone="tint" title="Gallery" intro="Snapshots of community moments and seva activities.">
-        <PhotoGallery photos={GALLERY} limit={6} />
+      <Section tone="tint" title={c.t("seva.gallery.title")} intro={c.t("seva.gallery.intro")}>
+        <PhotoGallery photos={photos} limit={6} />
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <ButtonLink href="/gallery" variant="secondary">View full gallery</ButtonLink>
-          <JoinVolunteerButton />
+          <ButtonLink href="/gallery" variant="secondary">{c.t("seva.gallery.link")}</ButtonLink>
+          <JoinVolunteerButton label={c.t("site.join")} />
         </div>
       </Section>
     </>

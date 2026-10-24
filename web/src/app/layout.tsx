@@ -3,21 +3,30 @@ import "@fontsource-variable/inter";
 import "./globals.css";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { NAV } from "@/components/layout/site-nav";
+import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.SITE_URL || "http://localhost:3000"),
-  title: { default: "India Overseas Forum | Serving Indians in Saudi Arabia", template: "%s | India Overseas Forum" },
-  description:
-    "India Overseas Forum supports the Indian community in Saudi Arabia through volunteer programs, cultural activities and essential support services.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const c = await getContent();
+  return {
+    metadataBase: new URL(process.env.SITE_URL || "http://localhost:3000"),
+    title: { default: c.t("seo.title"), template: `%s | ${c.t("site.name")}` },
+    description: c.t("seo.description"),
+  };
+}
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#0b2545" };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const c = await getContent();
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col">
-        <Header />
+        <Header
+          nav={NAV.map((n) => ({ href: n.href, label: c.t(n.key) }))}
+          name={c.t("site.name")} tagline={c.t("site.tagline")}
+          logo={c.img("site.logo") ?? ""} joinLabel={c.t("site.join")}
+        />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
       </body>

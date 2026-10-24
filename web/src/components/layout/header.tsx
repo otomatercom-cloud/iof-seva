@@ -6,10 +6,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { JoinVolunteerButton } from "@/components/ui/button";
-import { cn, images } from "@/lib/utils";
-import { NAV } from "./site-nav";
+import { cn } from "@/lib/utils";
+import type { NavLink } from "./site-nav";
 
-export function Header() {
+export function Header({ nav, name, tagline, logo, joinLabel }: {
+  nav: NavLink[]; name: string; tagline: string; logo: string; joinLabel: string;
+}) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -19,16 +21,16 @@ export function Header() {
         Skip to content
       </a>
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3" aria-label="India Overseas Forum home">
-          <Image src={images.logo} alt="" width={40} height={40} className="size-10 object-contain" />
+        <Link href="/" className="flex items-center gap-3" aria-label={`${name} home`}>
+          <Image src={logo} alt="" width={40} height={40} className="size-10 object-contain" />
           <span className="text-base font-bold leading-tight text-navy-900">
-            India Overseas Forum
-            <span className="block text-[11px] font-medium text-slate-500">Serving Indians across Saudi Arabia</span>
+            {name}
+            <span className="block text-[11px] font-medium text-slate-500">{tagline}</span>
           </span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 xl:flex">
-          {NAV.map((item) => (
+          {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -41,7 +43,7 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <JoinVolunteerButton className="ml-2 px-5 py-2" />
+          <JoinVolunteerButton className="ml-2 px-5 py-2" label={joinLabel} />
         </nav>
 
         <button
@@ -59,7 +61,7 @@ export function Header() {
       {open && (
         <nav id="mobile-nav" aria-label="Mobile" className="border-t border-slate-200 bg-white px-4 pb-4 xl:hidden">
           <ul className="flex flex-col py-2">
-            {NAV.map((item) => (
+            {nav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
@@ -72,7 +74,7 @@ export function Header() {
               </li>
             ))}
           </ul>
-          <JoinVolunteerButton className="w-full" />
+          <JoinVolunteerButton className="w-full" label={joinLabel} />
         </nav>
       )}
     </header>

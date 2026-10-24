@@ -1,27 +1,31 @@
 import type { Metadata } from "next";
-import { CONTACT_EMAIL } from "@/components/layout/site-nav";
 import { PageHero, Section } from "@/components/sections/page-hero";
 import { Card } from "@/components/ui/card";
+import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = { title: "Collaborations" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getContent()).t("nav.collab") };
+}
 
-export default function CollaborationsPage() {
+export default async function CollaborationsPage() {
+  const c = await getContent();
+  const email = c.t("site.email");
   const subject = encodeURIComponent("Partnership enquiry");
   return (
     <>
-      <PageHero title="Collaborations" intro="Partner with IOF to support Indian residents across Saudi Arabia." />
+      <PageHero title={c.t("collab.title")} intro={c.t("collab.intro")} />
       <Section>
         <div className="grid gap-6 md:grid-cols-3">
-          <Card><h2 className="text-lg">Health drives</h2><p className="mt-2 text-sm text-slate-600">Free medical check-ups and blood donation camps.</p></Card>
-          <Card><h2 className="text-lg">Educational aid</h2><p className="mt-2 text-sm text-slate-600">Scholarships and learning materials for Indian students.</p></Card>
-          <Card><h2 className="text-lg">Emergency relief</h2><p className="mt-2 text-sm text-slate-600">Rapid response teams that assist during crises.</p></Card>
+          {c.items("collab_cards").map((k) => (
+            <Card key={k.title}><h2 className="text-lg">{k.title}</h2><p className="mt-2 text-sm text-slate-600">{k.text}</p></Card>
+          ))}
         </div>
         <div className="mx-auto mt-12 max-w-2xl rounded-2xl bg-navy-50 p-8 text-center">
-          <h2 className="text-2xl">Partnership enquiries</h2>
-          <p className="mt-2 text-slate-600">Tell us about your organisation and how you would like to collaborate.</p>
-          <a href={`mailto:${CONTACT_EMAIL}?subject=${subject}`}
+          <h2 className="text-2xl">{c.t("collab.enquiry.title")}</h2>
+          <p className="mt-2 text-slate-600">{c.t("collab.enquiry.text")}</p>
+          <a href={`mailto:${email}?subject=${subject}`}
             className="mt-5 inline-block rounded-full bg-saffron-700 px-6 py-3 text-sm font-semibold text-white hover:bg-saffron-600">
-            Email {CONTACT_EMAIL}
+            {c.t("collab.enquiry.button")} {email}
           </a>
         </div>
       </Section>

@@ -23,10 +23,10 @@ export function ButtonLink({ variant = "primary", className, ...props }: Compone
   return <Link className={cn(base, variants[variant], className)} {...props} />;
 }
 
-export function JoinVolunteerButton({ className, variant = "primary" }: { className?: string; variant?: Variant }) {
+export function JoinVolunteerButton({ className, variant = "primary", label = "Join as Volunteer" }: { className?: string; variant?: Variant; label?: string }) {
   return (
     <ButtonLink href="/volunteer-registration" variant={variant} className={className}>
-      Join as Volunteer
+      {label}
     </ButtonLink>
   );
 }

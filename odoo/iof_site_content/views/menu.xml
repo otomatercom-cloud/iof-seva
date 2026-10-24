@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_iof_site_root" name="Website Content" sequence="41"
+              groups="iof_site_content.group_iof_site_editor"/>
+    <menuitem id="menu_iof_site_gallery" name="Photo Gallery" parent="menu_iof_site_root"
+              action="action_iof_site_gallery" sequence="10"/>
+    <menuitem id="menu_iof_site_reports" name="Reports" parent="menu_iof_site_root"
+              action="action_iof_site_reports" sequence="20"/>
+    <menuitem id="menu_iof_site_text" name="Page Texts" parent="menu_iof_site_root"
+              action="action_iof_site_text" sequence="30"/>
+    <menuitem id="menu_iof_site_item" name="Lists &amp; Cards" parent="menu_iof_site_root"
+              action="action_iof_site_item" sequence="40"/>
+</odoo>

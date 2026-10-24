@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
-import { PhotoGallery } from "@/components/sections/photo-gallery";
 import { PageHero, Section } from "@/components/sections/page-hero";
+import { PhotoGallery } from "@/components/sections/photo-gallery";
 import { JoinVolunteerButton } from "@/components/ui/button";
-import { GALLERY } from "@/lib/gallery";
+import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Photo Gallery",
-  description: "Snapshots of community moments and seva activities by India Overseas Forum in Saudi Arabia.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const c = await getContent();
+  return { title: c.t("gallery.title"), description: c.t("gallery.intro") };
+}
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  const c = await getContent();
+  const photos = c.items("gallery").map((g) => ({ src: g.image, alt: g.title }));
   return (
     <>
-      <PageHero title="Photo Gallery" intro="Snapshots of community moments and heartfelt seva activities across Saudi Arabia." />
+      <PageHero title={c.t("gallery.title")} intro={c.t("gallery.intro")} />
       <Section>
-        <PhotoGallery photos={GALLERY} />
+        <PhotoGallery photos={photos} />
         <div className="mt-12 text-center">
-          <p className="mb-4 text-slate-600">Be part of the next moment.</p>
-          <JoinVolunteerButton />
+          <p className="mb-4 text-slate-600">{c.t("gallery.cta")}</p>
+          <JoinVolunteerButton label={c.t("site.join")} />
         </div>
       </Section>
     </>

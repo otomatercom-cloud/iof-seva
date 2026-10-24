@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_iof_site_text_editor,iof.site.text editor,model_iof_site_text,group_iof_site_editor,1,1,0,0
+access_iof_site_text_manager,iof.site.text manager,model_iof_site_text,group_iof_site_manager,1,1,1,1
+access_iof_site_item_editor,iof.site.item editor,model_iof_site_item,group_iof_site_editor,1,1,1,1
+access_iof_site_item_manager,iof.site.item manager,model_iof_site_item,group_iof_site_manager,1,1,1,1
