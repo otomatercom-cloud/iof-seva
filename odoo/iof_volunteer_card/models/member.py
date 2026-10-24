@@ -43,10 +43,12 @@ class AssociationMember(models.Model):
         }
 
     def _iof_card_zoom(self):
-        """An unpatched-Qt wkhtmltopdf (e.g. distro packages) renders everything at ~78%, which would leave
-        the card small on a larger page. Compensate so the card fills the page with either build."""
-        from odoo.addons.base.models.ir_actions_report import _wkhtml
+        """wkhtmltopdf renders CSS millimetres at ~80% on both patched and unpatched Qt builds, which left the
+        card small on its page (white strip on the right/bottom). Compensate; tune per server with the system
+        parameter `iof_volunteer_card.zoom` (e.g. 1.25 if white remains, 1.0 to disable)."""
+        raw = self.env["ir.config_parameter"].sudo().get_param("iof_volunteer_card.zoom")
         try:
-            return 1.0 if _wkhtml().is_patched_qt else 1.3
-        except Exception:
-            return 1.0
+            zoom = float(raw) if raw else 1.27
+        except ValueError:
+            zoom = 1.27
+        return min(max(zoom, 0.5), 2.0)

@@ -2,7 +2,7 @@ import "server-only";
 
 export class OdooError extends Error {
   constructor(
-    public readonly kind: "timeout" | "network" | "unauthorized" | "rejected" | "server",
+    public readonly kind: "timeout" | "network" | "unauthorized" | "rejected" | "notfound" | "conflict" | "server",
     public readonly status?: number,
     public readonly fields?: Record<string, string>,
   ) {
@@ -66,6 +66,8 @@ async function odooRequest<T>(
       const fields = (data as { fields?: Record<string, string> } | null)?.fields;
       throw new OdooError("rejected", 422, fields);
     }
+    if (res.status === 404) throw new OdooError("notfound", 404);
+    if (res.status === 409) throw new OdooError("conflict", 409);
     if (!res.ok || !data) throw new OdooError("server", res.status);
     return { status: res.status, data: data as T };
   } catch (err) {

@@ -91,3 +91,10 @@ class TestVolunteerCard(TransactionCase):
         html = report._render_qweb_html(report.report_name, rec.member_id.ids)[0].decode()
         self.assertIn("Volunteer Identity Card", html)
         self.assertIn("data:image/png;base64", html)
+
+    def test_approved_menu_action(self):
+        act = self.env.ref("iof_volunteer_card.action_iof_approved_volunteers")
+        rec = self._make()
+        self.assertNotIn(rec, self.env[act.res_model].search(eval(act.domain)))
+        rec.action_approve()
+        self.assertIn(rec, self.env[act.res_model].search(eval(act.domain)))

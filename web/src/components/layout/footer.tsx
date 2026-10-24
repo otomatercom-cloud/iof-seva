@@ -2,7 +2,7 @@ import { Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 import { JoinVolunteerButton } from "@/components/ui/button";
 import { getContent } from "@/lib/content";
-import { NAV } from "./site-nav";
+import { NAV, SUPPORT_LINK } from "./site-nav";
 
 export async function Footer() {
   const c = await getContent();
@@ -22,6 +22,8 @@ export async function Footer() {
               <li key={item.href}><Link href={item.href} className="hover:text-white">{c.t(item.key)}</Link></li>
             ))}
             <li><Link href="/volunteer-registration" className="hover:text-white">{c.t("footer.volunteer")}</Link></li>
+            <li><Link href={SUPPORT_LINK.href} className="hover:text-white">{c.t(SUPPORT_LINK.key)}</Link></li>
+            <li><Link href="/support/track" className="hover:text-white">{c.t("footer.support")}</Link></li>
           </ul>
         </nav>
         <div>

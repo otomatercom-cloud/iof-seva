@@ -61,6 +61,10 @@ COLLECTIONS = [
         "Volunteer page: what happens next"
     ],
     [
+        "support_steps",
+        "Support page: how it works"
+    ],
+    [
         "gallery",
         "Photo gallery (upload photos in Odoo)"
     ]

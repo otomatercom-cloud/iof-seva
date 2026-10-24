@@ -10,3 +10,5 @@ export const NAV = [
 ] as const;
 
 export type NavLink = { href: string; label: string };
+
+export const SUPPORT_LINK = { href: "/support", key: "nav.support" } as const;

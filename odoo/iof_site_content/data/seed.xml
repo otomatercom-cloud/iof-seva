@@ -154,6 +154,24 @@
             <field name="default_value">Contact</field>
             <field name="sequence">170</field>
         </record>
+        <record id="text_nav_support" model="iof.site.text">
+            <field name="key">nav.support</field>
+            <field name="page">Menu &amp; footer</field>
+            <field name="label">Menu: Support</field>
+            <field name="kind">line</field>
+            <field name="value">Support</field>
+            <field name="default_value">Support</field>
+            <field name="sequence">180</field>
+        </record>
+        <record id="text_footer_support" model="iof.site.text">
+            <field name="key">footer.support</field>
+            <field name="page">Menu &amp; footer</field>
+            <field name="label">Footer link: Track a request</field>
+            <field name="kind">line</field>
+            <field name="value">Track a Support Request</field>
+            <field name="default_value">Track a Support Request</field>
+            <field name="sequence">190</field>
+        </record>
         <record id="text_footer_about" model="iof.site.text">
             <field name="key">footer.about</field>
             <field name="page">Menu &amp; footer</field>
@@ -161,7 +179,7 @@
             <field name="kind">text</field>
             <field name="value">Uplifting the Indian community in Saudi Arabia through support, culture and service.</field>
             <field name="default_value">Uplifting the Indian community in Saudi Arabia through support, culture and service.</field>
-            <field name="sequence">180</field>
+            <field name="sequence">200</field>
         </record>
         <record id="text_footer_explore" model="iof.site.text">
             <field name="key">footer.explore</field>
@@ -170,7 +188,7 @@
             <field name="kind">line</field>
             <field name="value">Explore</field>
             <field name="default_value">Explore</field>
-            <field name="sequence">190</field>
+            <field name="sequence">210</field>
         </record>
         <record id="text_footer_volunteer" model="iof.site.text">
             <field name="key">footer.volunteer</field>
@@ -179,7 +197,7 @@
             <field name="kind">line</field>
             <field name="value">Volunteer Registration</field>
             <field name="default_value">Volunteer Registration</field>
-            <field name="sequence">200</field>
+            <field name="sequence">220</field>
         </record>
         <record id="text_footer_contact" model="iof.site.text">
             <field name="key">footer.contact</field>
@@ -188,7 +206,7 @@
             <field name="kind">line</field>
             <field name="value">Contact</field>
             <field name="default_value">Contact</field>
-            <field name="sequence">210</field>
+            <field name="sequence">230</field>
         </record>
         <record id="text_footer_rights" model="iof.site.text">
             <field name="key">footer.rights</field>
@@ -197,7 +215,7 @@
             <field name="kind">line</field>
             <field name="value">All rights reserved.</field>
             <field name="default_value">All rights reserved.</field>
-            <field name="sequence">220</field>
+            <field name="sequence">240</field>
         </record>
         <record id="text_footer_privacy" model="iof.site.text">
             <field name="key">footer.privacy</field>
@@ -206,7 +224,7 @@
             <field name="kind">line</field>
             <field name="value">Privacy Policy</field>
             <field name="default_value">Privacy Policy</field>
-            <field name="sequence">230</field>
+            <field name="sequence">250</field>
         </record>
         <record id="text_footer_terms" model="iof.site.text">
             <field name="key">footer.terms</field>
@@ -215,7 +233,7 @@
             <field name="kind">line</field>
             <field name="value">Terms &amp; Conditions</field>
             <field name="default_value">Terms &amp; Conditions</field>
-            <field name="sequence">240</field>
+            <field name="sequence">260</field>
         </record>
         <record id="text_home_hero_badge" model="iof.site.text">
             <field name="key">home.hero.badge</field>
@@ -224,7 +242,7 @@
             <field name="kind">line</field>
             <field name="value">India Overseas Forum · Saudi Arabia</field>
             <field name="default_value">India Overseas Forum · Saudi Arabia</field>
-            <field name="sequence">250</field>
+            <field name="sequence">270</field>
         </record>
         <record id="text_home_hero_title_main" model="iof.site.text">
             <field name="key">home.hero.title_main</field>
@@ -233,7 +251,7 @@
             <field name="kind">line</field>
             <field name="value">Together, We Make a</field>
             <field name="default_value">Together, We Make a</field>
-            <field name="sequence">260</field>
+            <field name="sequence">280</field>
         </record>
         <record id="text_home_hero_title_accent" model="iof.site.text">
             <field name="key">home.hero.title_accent</field>
@@ -242,7 +260,7 @@
             <field name="kind">line</field>
             <field name="value">Difference.</field>
             <field name="default_value">Difference.</field>
-            <field name="sequence">270</field>
+            <field name="sequence">290</field>
         </record>
         <record id="text_home_hero_intro" model="iof.site.text">
             <field name="key">home.hero.intro</field>
@@ -251,7 +269,7 @@
             <field name="kind">text</field>
             <field name="value">Connecting, supporting and empowering the Indian community across Saudi Arabia, every day, through service, culture and volunteering.</field>
             <field name="default_value">Connecting, supporting and empowering the Indian community across Saudi Arabia, every day, through service, culture and volunteering.</field>
-            <field name="sequence">280</field>
+            <field name="sequence">300</field>
         </record>
         <record id="text_home_hero_cta1" model="iof.site.text">
             <field name="key">home.hero.cta1</field>
@@ -260,7 +278,7 @@
             <field name="kind">line</field>
             <field name="value">Join as Volunteer</field>
             <field name="default_value">Join as Volunteer</field>
-            <field name="sequence">290</field>
+            <field name="sequence">310</field>
         </record>
         <record id="text_home_hero_cta2" model="iof.site.text">
             <field name="key">home.hero.cta2</field>
@@ -269,7 +287,7 @@
             <field name="kind">line</field>
             <field name="value">Explore Seva Activities</field>
             <field name="default_value">Explore Seva Activities</field>
-            <field name="sequence">300</field>
+            <field name="sequence">320</field>
         </record>
         <record id="text_home_intro_image" model="iof.site.text">
             <field name="key">home.intro.image</field>
@@ -278,7 +296,7 @@
             <field name="kind">image</field>
             <field name="value"></field>
             <field name="default_value"></field>
-            <field name="sequence">310</field>
+            <field name="sequence">330</field>
         </record>
         <record id="text_home_intro_image_alt" model="iof.site.text">
             <field name="key">home.intro.image_alt</field>
@@ -287,7 +305,7 @@
             <field name="kind">line</field>
             <field name="value">IOF volunteers serving the community</field>
             <field name="default_value">IOF volunteers serving the community</field>
-            <field name="sequence">320</field>
+            <field name="sequence">340</field>
         </record>
         <record id="text_home_intro_badge" model="iof.site.text">
             <field name="key">home.intro.badge</field>
@@ -296,7 +314,7 @@
             <field name="kind">line</field>
             <field name="value">Volunteer-driven since day one</field>
             <field name="default_value">Volunteer-driven since day one</field>
-            <field name="sequence">330</field>
+            <field name="sequence">350</field>
         </record>
         <record id="text_home_intro_eyebrow" model="iof.site.text">
             <field name="key">home.intro.eyebrow</field>
@@ -305,7 +323,7 @@
             <field name="kind">line</field>
             <field name="value">About IOF</field>
             <field name="default_value">About IOF</field>
-            <field name="sequence">340</field>
+            <field name="sequence">360</field>
         </record>
         <record id="text_home_intro_title" model="iof.site.text">
             <field name="key">home.intro.title</field>
@@ -314,7 +332,7 @@
             <field name="kind">line</field>
             <field name="value">A nonprofit that serves, educates and connects</field>
             <field name="default_value">A nonprofit that serves, educates and connects</field>
-            <field name="sequence">350</field>
+            <field name="sequence">370</field>
         </record>
         <record id="text_home_intro_body" model="iof.site.text">
             <field name="key">home.intro.body</field>
@@ -323,7 +341,7 @@
             <field name="kind">text</field>
             <field name="value">India Overseas Forum is dedicated to uplifting the Indian community in Saudi Arabia through support, culture and service, with welfare programs, cultural events and volunteer-driven initiatives.</field>
             <field name="default_value">India Overseas Forum is dedicated to uplifting the Indian community in Saudi Arabia through support, culture and service, with welfare programs, cultural events and volunteer-driven initiatives.</field>
-            <field name="sequence">360</field>
+            <field name="sequence">380</field>
         </record>
         <record id="text_home_intro_link" model="iof.site.text">
             <field name="key">home.intro.link</field>
@@ -332,7 +350,7 @@
             <field name="kind">line</field>
             <field name="value">Learn more about us</field>
             <field name="default_value">Learn more about us</field>
-            <field name="sequence">370</field>
+            <field name="sequence">390</field>
         </record>
         <record id="text_home_pillars_eyebrow" model="iof.site.text">
             <field name="key">home.pillars.eyebrow</field>
@@ -341,7 +359,7 @@
             <field name="kind">line</field>
             <field name="value">Seva Activities</field>
             <field name="default_value">Seva Activities</field>
-            <field name="sequence">380</field>
+            <field name="sequence">400</field>
         </record>
         <record id="text_home_pillars_title" model="iof.site.text">
             <field name="key">home.pillars.title</field>
@@ -350,7 +368,7 @@
             <field name="kind">line</field>
             <field name="value">How we stand with our community</field>
             <field name="default_value">How we stand with our community</field>
-            <field name="sequence">390</field>
+            <field name="sequence">410</field>
         </record>
         <record id="text_home_impact_eyebrow" model="iof.site.text">
             <field name="key">home.impact.eyebrow</field>
@@ -359,7 +377,7 @@
             <field name="kind">line</field>
             <field name="value">Community Impact</field>
             <field name="default_value">Community Impact</field>
-            <field name="sequence">400</field>
+            <field name="sequence">420</field>
         </record>
         <record id="text_home_impact_number" model="iof.site.text">
             <field name="key">home.impact.number</field>
@@ -368,7 +386,7 @@
             <field name="kind">line</field>
             <field name="value">500</field>
             <field name="default_value">500</field>
-            <field name="sequence">410</field>
+            <field name="sequence">430</field>
         </record>
         <record id="text_home_impact_suffix" model="iof.site.text">
             <field name="key">home.impact.suffix</field>
@@ -377,7 +395,7 @@
             <field name="kind">line</field>
             <field name="value">+</field>
             <field name="default_value">+</field>
-            <field name="sequence">420</field>
+            <field name="sequence">440</field>
         </record>
         <record id="text_home_impact_text" model="iof.site.text">
             <field name="key">home.impact.text</field>
@@ -386,7 +404,7 @@
             <field name="kind">text</field>
             <field name="value">families received nutritious meals during Ramadan across Saudi Arabia through our Food Drive.</field>
             <field name="default_value">families received nutritious meals during Ramadan across Saudi Arabia through our Food Drive.</field>
-            <field name="sequence">430</field>
+            <field name="sequence">450</field>
         </record>
         <record id="text_home_moments_eyebrow" model="iof.site.text">
             <field name="key">home.moments.eyebrow</field>
@@ -395,7 +413,7 @@
             <field name="kind">line</field>
             <field name="value">Our Moments</field>
             <field name="default_value">Our Moments</field>
-            <field name="sequence">440</field>
+            <field name="sequence">460</field>
         </record>
         <record id="text_home_moments_title" model="iof.site.text">
             <field name="key">home.moments.title</field>
@@ -404,7 +422,7 @@
             <field name="kind">line</field>
             <field name="value">Snapshots of community spirit</field>
             <field name="default_value">Snapshots of community spirit</field>
-            <field name="sequence">450</field>
+            <field name="sequence">470</field>
         </record>
         <record id="text_home_moments_intro" model="iof.site.text">
             <field name="key">home.moments.intro</field>
@@ -413,7 +431,7 @@
             <field name="kind">line</field>
             <field name="value">Vibrant cultural celebrations and seva activities across Saudi Arabia.</field>
             <field name="default_value">Vibrant cultural celebrations and seva activities across Saudi Arabia.</field>
-            <field name="sequence">460</field>
+            <field name="sequence">480</field>
         </record>
         <record id="text_home_moments_link" model="iof.site.text">
             <field name="key">home.moments.link</field>
@@ -422,7 +440,7 @@
             <field name="kind">line</field>
             <field name="value">View full gallery</field>
             <field name="default_value">View full gallery</field>
-            <field name="sequence">470</field>
+            <field name="sequence">490</field>
         </record>
         <record id="text_home_volunteer_eyebrow" model="iof.site.text">
             <field name="key">home.volunteer.eyebrow</field>
@@ -431,7 +449,7 @@
             <field name="kind">line</field>
             <field name="value">Volunteer Hub</field>
             <field name="default_value">Volunteer Hub</field>
-            <field name="sequence">480</field>
+            <field name="sequence">500</field>
         </record>
         <record id="text_home_volunteer_title" model="iof.site.text">
             <field name="key">home.volunteer.title</field>
@@ -440,7 +458,7 @@
             <field name="kind">line</field>
             <field name="value">Your time can change a family's week.</field>
             <field name="default_value">Your time can change a family's week.</field>
-            <field name="sequence">490</field>
+            <field name="sequence">510</field>
         </record>
         <record id="text_home_volunteer_body" model="iof.site.text">
             <field name="key">home.volunteer.body</field>
@@ -449,7 +467,7 @@
             <field name="kind">text</field>
             <field name="value">Join hands with us in blood donation, education, cultural events, medical support, emergency relief and more. Registration takes a few minutes.</field>
             <field name="default_value">Join hands with us in blood donation, education, cultural events, medical support, emergency relief and more. Registration takes a few minutes.</field>
-            <field name="sequence">500</field>
+            <field name="sequence">520</field>
         </record>
         <record id="text_home_volunteer_note" model="iof.site.text">
             <field name="key">home.volunteer.note</field>
@@ -458,7 +476,7 @@
             <field name="kind">line</field>
             <field name="value">Free · Flexible hours · Every skill welcome</field>
             <field name="default_value">Free · Flexible hours · Every skill welcome</field>
-            <field name="sequence">510</field>
+            <field name="sequence">530</field>
         </record>
         <record id="text_home_collab_eyebrow" model="iof.site.text">
             <field name="key">home.collab.eyebrow</field>
@@ -467,7 +485,7 @@
             <field name="kind">line</field>
             <field name="value">Collaborations</field>
             <field name="default_value">Collaborations</field>
-            <field name="sequence">520</field>
+            <field name="sequence">540</field>
         </record>
         <record id="text_home_collab_title" model="iof.site.text">
             <field name="key">home.collab.title</field>
@@ -476,7 +494,7 @@
             <field name="kind">line</field>
             <field name="value">Partner with IOF to reach more families</field>
             <field name="default_value">Partner with IOF to reach more families</field>
-            <field name="sequence">530</field>
+            <field name="sequence">550</field>
         </record>
         <record id="text_home_collab_body" model="iof.site.text">
             <field name="key">home.collab.body</field>
@@ -485,7 +503,7 @@
             <field name="kind">text</field>
             <field name="value">Organisations and professionals are welcome. Our planned Medical, Teacher and Business Forums connect the community with those who can help.</field>
             <field name="default_value">Organisations and professionals are welcome. Our planned Medical, Teacher and Business Forums connect the community with those who can help.</field>
-            <field name="sequence">540</field>
+            <field name="sequence">560</field>
         </record>
         <record id="text_home_collab_cta" model="iof.site.text">
             <field name="key">home.collab.cta</field>
@@ -494,7 +512,7 @@
             <field name="kind">line</field>
             <field name="value">Partnership enquiries</field>
             <field name="default_value">Partnership enquiries</field>
-            <field name="sequence">550</field>
+            <field name="sequence">570</field>
         </record>
         <record id="text_home_reports_eyebrow" model="iof.site.text">
             <field name="key">home.reports.eyebrow</field>
@@ -503,7 +521,7 @@
             <field name="kind">line</field>
             <field name="value">Reports and updates</field>
             <field name="default_value">Reports and updates</field>
-            <field name="sequence">560</field>
+            <field name="sequence">580</field>
         </record>
         <record id="text_home_contact_title" model="iof.site.text">
             <field name="key">home.contact.title</field>
@@ -512,7 +530,7 @@
             <field name="kind">line</field>
             <field name="value">Get in touch</field>
             <field name="default_value">Get in touch</field>
-            <field name="sequence">570</field>
+            <field name="sequence">590</field>
         </record>
         <record id="text_about_title" model="iof.site.text">
             <field name="key">about.title</field>
@@ -521,7 +539,7 @@
             <field name="kind">line</field>
             <field name="value">About India Overseas Forum</field>
             <field name="default_value">About India Overseas Forum</field>
-            <field name="sequence">580</field>
+            <field name="sequence">600</field>
         </record>
         <record id="text_about_intro" model="iof.site.text">
             <field name="key">about.intro</field>
@@ -530,7 +548,7 @@
             <field name="kind">text</field>
             <field name="value">A nonprofit supporting the Indian community in Saudi Arabia through welfare programs, cultural events, and volunteer-driven initiatives.</field>
             <field name="default_value">A nonprofit supporting the Indian community in Saudi Arabia through welfare programs, cultural events, and volunteer-driven initiatives.</field>
-            <field name="sequence">590</field>
+            <field name="sequence">610</field>
         </record>
         <record id="text_about_mission_title" model="iof.site.text">
             <field name="key">about.mission.title</field>
@@ -539,7 +557,7 @@
             <field name="kind">line</field>
             <field name="value">Our mission</field>
             <field name="default_value">Our mission</field>
-            <field name="sequence">600</field>
+            <field name="sequence">620</field>
         </record>
         <record id="text_about_mission_text" model="iof.site.text">
             <field name="key">about.mission.text</field>
@@ -548,7 +566,7 @@
             <field name="kind">text</field>
             <field name="value">To become a leading organization that serves, educates, and creates business opportunities for the Indian diaspora in Saudi Arabia.</field>
             <field name="default_value">To become a leading organization that serves, educates, and creates business opportunities for the Indian diaspora in Saudi Arabia.</field>
-            <field name="sequence">610</field>
+            <field name="sequence">630</field>
         </record>
         <record id="text_about_goals_title" model="iof.site.text">
             <field name="key">about.goals.title</field>
@@ -557,7 +575,7 @@
             <field name="kind">line</field>
             <field name="value">Our goals</field>
             <field name="default_value">Our goals</field>
-            <field name="sequence">620</field>
+            <field name="sequence">640</field>
         </record>
         <record id="text_about_forums_title" model="iof.site.text">
             <field name="key">about.forums.title</field>
@@ -566,7 +584,7 @@
             <field name="kind">line</field>
             <field name="value">Our forums</field>
             <field name="default_value">Our forums</field>
-            <field name="sequence">630</field>
+            <field name="sequence">650</field>
         </record>
         <record id="text_about_forums_intro" model="iof.site.text">
             <field name="key">about.forums.intro</field>
@@ -575,7 +593,7 @@
             <field name="kind">line</field>
             <field name="value">Three volunteer-led forums are planned to widen IOF's reach.</field>
             <field name="default_value">Three volunteer-led forums are planned to widen IOF's reach.</field>
-            <field name="sequence">640</field>
+            <field name="sequence">660</field>
         </record>
         <record id="text_about_support_title" model="iof.site.text">
             <field name="key">about.support.title</field>
@@ -584,7 +602,7 @@
             <field name="kind">line</field>
             <field name="value">Community support</field>
             <field name="default_value">Community support</field>
-            <field name="sequence">650</field>
+            <field name="sequence">670</field>
         </record>
         <record id="text_indians_title" model="iof.site.text">
             <field name="key">indians.title</field>
@@ -593,7 +611,7 @@
             <field name="kind">line</field>
             <field name="value">Indians in KSA</field>
             <field name="default_value">Indians in KSA</field>
-            <field name="sequence">660</field>
+            <field name="sequence">680</field>
         </record>
         <record id="text_indians_intro" model="iof.site.text">
             <field name="key">indians.intro</field>
@@ -602,7 +620,7 @@
             <field name="kind">line</field>
             <field name="value">Information and support for Indian residents across Saudi Arabia.</field>
             <field name="default_value">Information and support for Indian residents across Saudi Arabia.</field>
-            <field name="sequence">670</field>
+            <field name="sequence">690</field>
         </record>
         <record id="text_indians_helps_title" model="iof.site.text">
             <field name="key">indians.helps.title</field>
@@ -611,7 +629,7 @@
             <field name="kind">line</field>
             <field name="value">How IOF helps</field>
             <field name="default_value">How IOF helps</field>
-            <field name="sequence">680</field>
+            <field name="sequence">700</field>
         </record>
         <record id="text_indians_faq_title" model="iof.site.text">
             <field name="key">indians.faq.title</field>
@@ -620,7 +638,7 @@
             <field name="kind">line</field>
             <field name="value">Frequently asked questions</field>
             <field name="default_value">Frequently asked questions</field>
-            <field name="sequence">690</field>
+            <field name="sequence">710</field>
         </record>
         <record id="text_indians_faq_note" model="iof.site.text">
             <field name="key">indians.faq.note</field>
@@ -629,7 +647,7 @@
             <field name="kind">text</field>
             <field name="value">This is general guidance. Always confirm requirements on the official Indian Embassy or Saudi government websites.</field>
             <field name="default_value">This is general guidance. Always confirm requirements on the official Indian Embassy or Saudi government websites.</field>
-            <field name="sequence">700</field>
+            <field name="sequence">720</field>
         </record>
         <record id="text_seva_title" model="iof.site.text">
             <field name="key">seva.title</field>
@@ -638,7 +656,7 @@
             <field name="kind">line</field>
             <field name="value">Seva Activities</field>
             <field name="default_value">Seva Activities</field>
-            <field name="sequence">710</field>
+            <field name="sequence">730</field>
         </record>
         <record id="text_seva_intro" model="iof.site.text">
             <field name="key">seva.intro</field>
@@ -647,7 +665,7 @@
             <field name="kind">line</field>
             <field name="value">Service in action: how IOF volunteers support families across Saudi Arabia.</field>
             <field name="default_value">Service in action: how IOF volunteers support families across Saudi Arabia.</field>
-            <field name="sequence">720</field>
+            <field name="sequence">740</field>
         </record>
         <record id="text_seva_gallery_title" model="iof.site.text">
             <field name="key">seva.gallery.title</field>
@@ -656,7 +674,7 @@
             <field name="kind">line</field>
             <field name="value">Gallery</field>
             <field name="default_value">Gallery</field>
-            <field name="sequence">730</field>
+            <field name="sequence">750</field>
         </record>
         <record id="text_seva_gallery_intro" model="iof.site.text">
             <field name="key">seva.gallery.intro</field>
@@ -665,7 +683,7 @@
             <field name="kind">line</field>
             <field name="value">Snapshots of community moments and seva activities.</field>
             <field name="default_value">Snapshots of community moments and seva activities.</field>
-            <field name="sequence">740</field>
+            <field name="sequence">760</field>
         </record>
         <record id="text_seva_gallery_link" model="iof.site.text">
             <field name="key">seva.gallery.link</field>
@@ -674,7 +692,7 @@
             <field name="kind">line</field>
             <field name="value">View full gallery</field>
             <field name="default_value">View full gallery</field>
-            <field name="sequence">750</field>
+            <field name="sequence">770</field>
         </record>
         <record id="text_gallery_title" model="iof.site.text">
             <field name="key">gallery.title</field>
@@ -683,7 +701,7 @@
             <field name="kind">line</field>
             <field name="value">Photo Gallery</field>
             <field name="default_value">Photo Gallery</field>
-            <field name="sequence">760</field>
+            <field name="sequence">780</field>
         </record>
         <record id="text_gallery_intro" model="iof.site.text">
             <field name="key">gallery.intro</field>
@@ -692,7 +710,7 @@
             <field name="kind">line</field>
             <field name="value">Snapshots of community moments and heartfelt seva activities across Saudi Arabia.</field>
             <field name="default_value">Snapshots of community moments and heartfelt seva activities across Saudi Arabia.</field>
-            <field name="sequence">770</field>
+            <field name="sequence">790</field>
         </record>
         <record id="text_gallery_cta" model="iof.site.text">
             <field name="key">gallery.cta</field>
@@ -701,7 +719,7 @@
             <field name="kind">line</field>
             <field name="value">Be part of the next moment.</field>
             <field name="default_value">Be part of the next moment.</field>
-            <field name="sequence">780</field>
+            <field name="sequence">800</field>
         </record>
         <record id="text_collab_title" model="iof.site.text">
             <field name="key">collab.title</field>
@@ -710,7 +728,7 @@
             <field name="kind">line</field>
             <field name="value">Collaborations</field>
             <field name="default_value">Collaborations</field>
-            <field name="sequence">790</field>
+            <field name="sequence">810</field>
         </record>
         <record id="text_collab_intro" model="iof.site.text">
             <field name="key">collab.intro</field>
@@ -719,7 +737,7 @@
             <field name="kind">line</field>
             <field name="value">Partner with IOF to support Indian residents across Saudi Arabia.</field>
             <field name="default_value">Partner with IOF to support Indian residents across Saudi Arabia.</field>
-            <field name="sequence">800</field>
+            <field name="sequence">820</field>
         </record>
         <record id="text_collab_enquiry_title" model="iof.site.text">
             <field name="key">collab.enquiry.title</field>
@@ -728,7 +746,7 @@
             <field name="kind">line</field>
             <field name="value">Partnership enquiries</field>
             <field name="default_value">Partnership enquiries</field>
-            <field name="sequence">810</field>
+            <field name="sequence">830</field>
         </record>
         <record id="text_collab_enquiry_text" model="iof.site.text">
             <field name="key">collab.enquiry.text</field>
@@ -737,7 +755,7 @@
             <field name="kind">line</field>
             <field name="value">Tell us about your organisation and how you would like to collaborate.</field>
             <field name="default_value">Tell us about your organisation and how you would like to collaborate.</field>
-            <field name="sequence">820</field>
+            <field name="sequence">840</field>
         </record>
         <record id="text_collab_enquiry_button" model="iof.site.text">
             <field name="key">collab.enquiry.button</field>
@@ -746,7 +764,7 @@
             <field name="kind">line</field>
             <field name="value">Email</field>
             <field name="default_value">Email</field>
-            <field name="sequence">830</field>
+            <field name="sequence">850</field>
         </record>
         <record id="text_reports_title" model="iof.site.text">
             <field name="key">reports.title</field>
@@ -755,7 +773,7 @@
             <field name="kind">line</field>
             <field name="value">Reports &amp; Updates</field>
             <field name="default_value">Reports &amp; Updates</field>
-            <field name="sequence">840</field>
+            <field name="sequence">860</field>
         </record>
         <record id="text_reports_intro" model="iof.site.text">
             <field name="key">reports.intro</field>
@@ -764,7 +782,7 @@
             <field name="kind">line</field>
             <field name="value">A look at what our volunteers and supporters have achieved together.</field>
             <field name="default_value">A look at what our volunteers and supporters have achieved together.</field>
-            <field name="sequence">850</field>
+            <field name="sequence">870</field>
         </record>
         <record id="text_reports_download" model="iof.site.text">
             <field name="key">reports.download</field>
@@ -773,7 +791,7 @@
             <field name="kind">line</field>
             <field name="value">Download report</field>
             <field name="default_value">Download report</field>
-            <field name="sequence">860</field>
+            <field name="sequence">880</field>
         </record>
         <record id="text_contact_title" model="iof.site.text">
             <field name="key">contact.title</field>
@@ -782,7 +800,7 @@
             <field name="kind">line</field>
             <field name="value">Contact Us</field>
             <field name="default_value">Contact Us</field>
-            <field name="sequence">870</field>
+            <field name="sequence">890</field>
         </record>
         <record id="text_contact_intro" model="iof.site.text">
             <field name="key">contact.intro</field>
@@ -791,7 +809,7 @@
             <field name="kind">line</field>
             <field name="value">We'd love to hear from you.</field>
             <field name="default_value">We'd love to hear from you.</field>
-            <field name="sequence">880</field>
+            <field name="sequence">900</field>
         </record>
         <record id="text_contact_email_label" model="iof.site.text">
             <field name="key">contact.email_label</field>
@@ -800,7 +818,7 @@
             <field name="kind">line</field>
             <field name="value">Email</field>
             <field name="default_value">Email</field>
-            <field name="sequence">890</field>
+            <field name="sequence">910</field>
         </record>
         <record id="text_contact_address_label" model="iof.site.text">
             <field name="key">contact.address_label</field>
@@ -809,7 +827,7 @@
             <field name="kind">line</field>
             <field name="value">Address</field>
             <field name="default_value">Address</field>
-            <field name="sequence">900</field>
+            <field name="sequence">920</field>
         </record>
         <record id="text_contact_hours_label" model="iof.site.text">
             <field name="key">contact.hours_label</field>
@@ -818,7 +836,7 @@
             <field name="kind">line</field>
             <field name="value">Office hours</field>
             <field name="default_value">Office hours</field>
-            <field name="sequence">910</field>
+            <field name="sequence">930</field>
         </record>
         <record id="text_contact_cta" model="iof.site.text">
             <field name="key">contact.cta</field>
@@ -827,7 +845,7 @@
             <field name="kind">line</field>
             <field name="value">Want to help? Support and uplift the Indian community in Saudi Arabia.</field>
             <field name="default_value">Want to help? Support and uplift the Indian community in Saudi Arabia.</field>
-            <field name="sequence">920</field>
+            <field name="sequence">940</field>
         </record>
         <record id="text_volunteer_eyebrow" model="iof.site.text">
             <field name="key">volunteer.eyebrow</field>
@@ -836,7 +854,7 @@
             <field name="kind">line</field>
             <field name="value">Volunteer Registration</field>
             <field name="default_value">Volunteer Registration</field>
-            <field name="sequence">930</field>
+            <field name="sequence">950</field>
         </record>
         <record id="text_volunteer_title" model="iof.site.text">
             <field name="key">volunteer.title</field>
@@ -845,7 +863,7 @@
             <field name="kind">line</field>
             <field name="value">Register as an IOF volunteer</field>
             <field name="default_value">Register as an IOF volunteer</field>
-            <field name="sequence">940</field>
+            <field name="sequence">960</field>
         </record>
         <record id="text_volunteer_intro" model="iof.site.text">
             <field name="key">volunteer.intro</field>
@@ -854,7 +872,7 @@
             <field name="kind">text</field>
             <field name="value">Become a volunteer and help strengthen our Indian community in Saudi Arabia. Tell us about yourself and where you would like to help.</field>
             <field name="default_value">Become a volunteer and help strengthen our Indian community in Saudi Arabia. Tell us about yourself and where you would like to help.</field>
-            <field name="sequence">950</field>
+            <field name="sequence">970</field>
         </record>
         <record id="text_volunteer_time" model="iof.site.text">
             <field name="key">volunteer.time</field>
@@ -863,7 +881,7 @@
             <field name="kind">line</field>
             <field name="value">About 3 minutes</field>
             <field name="default_value">About 3 minutes</field>
-            <field name="sequence">960</field>
+            <field name="sequence">980</field>
         </record>
         <record id="text_volunteer_sections" model="iof.site.text">
             <field name="key">volunteer.sections</field>
@@ -872,7 +890,7 @@
             <field name="kind">line</field>
             <field name="value">6 short sections</field>
             <field name="default_value">6 short sections</field>
-            <field name="sequence">970</field>
+            <field name="sequence">990</field>
         </record>
         <record id="text_volunteer_next_title" model="iof.site.text">
             <field name="key">volunteer.next.title</field>
@@ -881,7 +899,7 @@
             <field name="kind">line</field>
             <field name="value">What happens next</field>
             <field name="default_value">What happens next</field>
-            <field name="sequence">980</field>
+            <field name="sequence">1000</field>
         </record>
         <record id="text_volunteer_help_title" model="iof.site.text">
             <field name="key">volunteer.help.title</field>
@@ -890,7 +908,7 @@
             <field name="kind">line</field>
             <field name="value">Questions?</field>
             <field name="default_value">Questions?</field>
-            <field name="sequence">990</field>
+            <field name="sequence">1010</field>
         </record>
         <record id="text_volunteer_help_text" model="iof.site.text">
             <field name="key">volunteer.help.text</field>
@@ -899,7 +917,97 @@
             <field name="kind">text</field>
             <field name="value">Write to us and we will help you pick the right way to volunteer.</field>
             <field name="default_value">Write to us and we will help you pick the right way to volunteer.</field>
-            <field name="sequence">1000</field>
+            <field name="sequence">1020</field>
+        </record>
+        <record id="text_support_eyebrow" model="iof.site.text">
+            <field name="key">support.eyebrow</field>
+            <field name="page">Support</field>
+            <field name="label">Request page: eyebrow</field>
+            <field name="kind">line</field>
+            <field name="value">IOF Support</field>
+            <field name="default_value">IOF Support</field>
+            <field name="sequence">1030</field>
+        </record>
+        <record id="text_support_title" model="iof.site.text">
+            <field name="key">support.title</field>
+            <field name="page">Support</field>
+            <field name="label">Request page: heading</field>
+            <field name="kind">line</field>
+            <field name="value">Get help with visa, iqama and other issues</field>
+            <field name="default_value">Get help with visa, iqama and other issues</field>
+            <field name="sequence">1040</field>
+        </record>
+        <record id="text_support_intro" model="iof.site.text">
+            <field name="key">support.intro</field>
+            <field name="page">Support</field>
+            <field name="label">Request page: intro</field>
+            <field name="kind">text</field>
+            <field name="value">Tell us what you need. You will get a private tracking token to follow your request and talk to our team.</field>
+            <field name="default_value">Tell us what you need. You will get a private tracking token to follow your request and talk to our team.</field>
+            <field name="sequence">1050</field>
+        </record>
+        <record id="text_support_next_title" model="iof.site.text">
+            <field name="key">support.next.title</field>
+            <field name="page">Support</field>
+            <field name="label">Side card heading</field>
+            <field name="kind">line</field>
+            <field name="value">How it works</field>
+            <field name="default_value">How it works</field>
+            <field name="sequence">1060</field>
+        </record>
+        <record id="text_support_track_title" model="iof.site.text">
+            <field name="key">support.track.title</field>
+            <field name="page">Support</field>
+            <field name="label">Track card heading</field>
+            <field name="kind">line</field>
+            <field name="value">Already have a token?</field>
+            <field name="default_value">Already have a token?</field>
+            <field name="sequence">1070</field>
+        </record>
+        <record id="text_support_track_text" model="iof.site.text">
+            <field name="key">support.track.text</field>
+            <field name="page">Support</field>
+            <field name="label">Track card text</field>
+            <field name="kind">text</field>
+            <field name="value">Check the status of your request and read replies from our team.</field>
+            <field name="default_value">Check the status of your request and read replies from our team.</field>
+            <field name="sequence">1080</field>
+        </record>
+        <record id="text_support_track_button" model="iof.site.text">
+            <field name="key">support.track.button</field>
+            <field name="page">Support</field>
+            <field name="label">Track card button</field>
+            <field name="kind">line</field>
+            <field name="value">Track my request</field>
+            <field name="default_value">Track my request</field>
+            <field name="sequence">1090</field>
+        </record>
+        <record id="text_track_title" model="iof.site.text">
+            <field name="key">track.title</field>
+            <field name="page">Support</field>
+            <field name="label">Track page: heading</field>
+            <field name="kind">line</field>
+            <field name="value">Track your support request</field>
+            <field name="default_value">Track your support request</field>
+            <field name="sequence">1100</field>
+        </record>
+        <record id="text_track_intro" model="iof.site.text">
+            <field name="key">track.intro</field>
+            <field name="page">Support</field>
+            <field name="label">Track page: intro</field>
+            <field name="kind">text</field>
+            <field name="value">Enter the token you received when you submitted your request.</field>
+            <field name="default_value">Enter the token you received when you submitted your request.</field>
+            <field name="sequence">1110</field>
+        </record>
+        <record id="text_track_new" model="iof.site.text">
+            <field name="key">track.new</field>
+            <field name="page">Support</field>
+            <field name="label">Track page: new request link</field>
+            <field name="kind">line</field>
+            <field name="value">Need to raise a new request?</field>
+            <field name="default_value">Need to raise a new request?</field>
+            <field name="sequence">1120</field>
         </record>
         <record id="text_privacy_title" model="iof.site.text">
             <field name="key">privacy.title</field>
@@ -908,7 +1016,7 @@
             <field name="kind">line</field>
             <field name="value">Privacy Policy</field>
             <field name="default_value">Privacy Policy</field>
-            <field name="sequence">1010</field>
+            <field name="sequence">1130</field>
         </record>
         <record id="text_privacy_intro" model="iof.site.text">
             <field name="key">privacy.intro</field>
@@ -917,7 +1025,7 @@
             <field name="kind">line</field>
             <field name="value">How India Overseas Forum handles volunteer information.</field>
             <field name="default_value">How India Overseas Forum handles volunteer information.</field>
-            <field name="sequence">1020</field>
+            <field name="sequence">1140</field>
         </record>
         <record id="text_privacy_body" model="iof.site.text">
             <field name="key">privacy.body</field>
@@ -966,7 +1074,7 @@ You may ask to see, correct or delete your information, or withdraw your consent
 
 ## Contact
 Questions about this policy: {email}.</field>
-            <field name="sequence">1030</field>
+            <field name="sequence">1150</field>
         </record>
         <record id="text_terms_title" model="iof.site.text">
             <field name="key">terms.title</field>
@@ -975,7 +1083,7 @@ Questions about this policy: {email}.</field>
             <field name="kind">line</field>
             <field name="value">Terms &amp; Conditions</field>
             <field name="default_value">Terms &amp; Conditions</field>
-            <field name="sequence">1040</field>
+            <field name="sequence">1160</field>
         </record>
         <record id="text_terms_intro" model="iof.site.text">
             <field name="key">terms.intro</field>
@@ -984,7 +1092,7 @@ Questions about this policy: {email}.</field>
             <field name="kind">line</field>
             <field name="value">Terms for using this website and registering as a volunteer.</field>
             <field name="default_value">Terms for using this website and registering as a volunteer.</field>
-            <field name="sequence">1050</field>
+            <field name="sequence">1170</field>
         </record>
         <record id="text_terms_body" model="iof.site.text">
             <field name="key">terms.body</field>
@@ -1019,7 +1127,7 @@ We may update these terms from time to time. Continued use of the site means you
 
 ## Contact
 Questions: {email}.</field>
-            <field name="sequence">1060</field>
+            <field name="sequence">1180</field>
         </record>
         <record id="item_hero_checks_1" model="iof.site.item">
             <field name="collection">hero_checks</field>
@@ -1379,6 +1487,24 @@ Questions: {email}.</field>
             <field name="collection">steps</field>
             <field name="title">We get in touch</field>
             <field name="text">We contact you about volunteer opportunities, events and community service.</field>
+            <field name="sequence">30</field>
+        </record>
+        <record id="item_support_steps_1" model="iof.site.item">
+            <field name="collection">support_steps</field>
+            <field name="title">Submit your request</field>
+            <field name="text">Choose a category and urgency. Emergencies and medical cases are prioritised automatically.</field>
+            <field name="sequence">10</field>
+        </record>
+        <record id="item_support_steps_2" model="iof.site.item">
+            <field name="collection">support_steps</field>
+            <field name="title">Save your token</field>
+            <field name="text">You receive a private token once. Keep it safe: it is the only way to open your request.</field>
+            <field name="sequence">20</field>
+        </record>
+        <record id="item_support_steps_3" model="iof.site.item">
+            <field name="collection">support_steps</field>
+            <field name="title">Track and reply</field>
+            <field name="text">Use the token on the Track page to see status, read our replies and add messages.</field>
             <field name="sequence">30</field>
         </record>
     </data>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_iof_support_root" name="IOF Support" sequence="42"
+              groups="iof_support_ticket.group_iof_support_user"/>
+    <menuitem id="menu_iof_support_tickets" name="Tickets" parent="menu_iof_support_root"
+              action="action_iof_ticket" sequence="10"/>
+</odoo>

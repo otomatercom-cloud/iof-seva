@@ -9,8 +9,8 @@ import { JoinVolunteerButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { NavLink } from "./site-nav";
 
-export function Header({ nav, name, tagline, logo, joinLabel }: {
-  nav: NavLink[]; name: string; tagline: string; logo: string; joinLabel: string;
+export function Header({ nav, name, tagline, logo, joinLabel, support }: {
+  nav: NavLink[]; name: string; tagline: string; logo: string; joinLabel: string; support: NavLink;
 }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -43,7 +43,9 @@ export function Header({ nav, name, tagline, logo, joinLabel }: {
               {item.label}
             </Link>
           ))}
-          <JoinVolunteerButton className="ml-2 px-5 py-2" label={joinLabel} />
+          <Link href={support.href} className={cn("ml-1 rounded-full border-2 border-navy-900 px-4 py-1.5 text-sm font-semibold text-navy-900 transition hover:bg-navy-900 hover:text-white",
+            pathname.startsWith("/support") && "bg-navy-900 text-white")}>{support.label}</Link>
+          <JoinVolunteerButton className="ml-1 px-5 py-2" label={joinLabel} />
         </nav>
 
         <button
@@ -74,6 +76,8 @@ export function Header({ nav, name, tagline, logo, joinLabel }: {
               </li>
             ))}
           </ul>
+          <Link href={support.href} onClick={() => setOpen(false)}
+            className="mb-3 block rounded-full border-2 border-navy-900 px-4 py-3 text-center font-semibold text-navy-900">{support.label}</Link>
           <JoinVolunteerButton className="w-full" label={joinLabel} />
         </nav>
       )}

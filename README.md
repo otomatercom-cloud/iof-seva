@@ -34,3 +34,15 @@ Install: `-i iof_site_content`. Uploads: images JPG/PNG/WebP/GIF ≤8MB (SVG ref
 Two-sided CR80 PDF (front: photo, name, Member ID, area, validity; back: QR + verify URL + signature line), navy/saffron/green.
 Needs python `qrcode` (`pip install qrcode`) and wkhtmltopdf (patched-Qt build recommended). Branding text can be set in
 System Parameters: `iof_volunteer_card.org_name`, `iof_volunteer_card.contact`.
+
+## Support Tickets (`iof_support_ticket`)
+
+Frontend: `/support` (create) and `/support/track` (check status by token, reply).
+
+- Install in Odoo: `-i iof_support_ticket`, then redeploy Next.js. For the new editable texts run `npm run content:export` and `-u iof_site_content`.
+- Auth: reuses the existing Bearer token (`iof_volunteer_registration.api_token`); no new env var.
+- Categories: visa, iqama, passport, employer/labour, medical, legal, emergency, other.
+- Priority = max(urgency, category floor): emergency -> Critical, medical -> High, legal/labour -> Normal. SLA deadline: Low 168h, Normal 72h, High 24h, Critical 4h.
+- Token: shown ONCE after submit (XXXX-XXXX-XXXX); only its SHA-256 hash is stored in Odoo. Lookup returns no personal data; internal notes are never exposed.
+- Optional param `iof_support_ticket.site_url` makes the emailed links absolute.
+- Rate limits (per IP / 10 min): `TICKET_RATE_LIMIT_MAX` (5), `LOOKUP_RATE_LIMIT_MAX` (10), `REPLY_RATE_LIMIT_MAX` (10).

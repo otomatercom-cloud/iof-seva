@@ -3,7 +3,7 @@ import "@fontsource-variable/inter";
 import "./globals.css";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
-import { NAV } from "@/components/layout/site-nav";
+import { NAV, SUPPORT_LINK } from "@/components/layout/site-nav";
 import { getContent } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -26,6 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           nav={NAV.map((n) => ({ href: n.href, label: c.t(n.key) }))}
           name={c.t("site.name")} tagline={c.t("site.tagline")}
           logo={c.img("site.logo") ?? ""} joinLabel={c.t("site.join")}
+          support={{ href: SUPPORT_LINK.href, label: c.t(SUPPORT_LINK.key) }}
         />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
