@@ -70,3 +70,14 @@ class TestVolunteerCard(TransactionCase):
         report = self.env.ref("association_membership.action_report_membership_card")
         html = report._render_qweb_html(report.report_name, rec.member_id.ids)[0]
         self.assertIn(rec.member_id.member_number.encode(), html)
+
+    def test_manager_can_read_card_attachment(self):
+        mgr = self.env.ref("iof_volunteer_registration.group_iof_volunteer_manager")
+        self.assertIn(self.env.ref("association_membership.group_membership_staff"), mgr.implied_ids)
+        user = self.env["res.users"].create({"name": "VM", "login": "vol_mgr_t", "group_ids": [(6, 0, [mgr.id])]})
+        rec = self._make()
+        rec.action_approve()
+        att = self.env["ir.attachment"].create({
+            "name": "c.pdf", "res_model": "association.member", "res_id": rec.member_id.id,
+            "raw": b"%PDF-1.4", "mimetype": "application/pdf"})
+        self.assertTrue(att.with_user(user).read(["name"]))

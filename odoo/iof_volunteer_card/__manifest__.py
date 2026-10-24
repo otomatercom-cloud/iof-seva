@@ -7,6 +7,6 @@
     "license": "OPL-1",
     "category": "Customizations",
     "depends": ["iof_volunteer_registration", "association_membership"],
-    "data": ["data/membership_type_data.xml", "views/registration_views.xml"],
+    "data": ["security/security.xml", "data/membership_type_data.xml", "views/registration_views.xml"],
     "installable": True,
 }

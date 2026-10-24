@@ -23,10 +23,23 @@ function config() {
 }
 
 /** POST JSON to the IOF Odoo API. Credentials stay on the server; Odoo errors are normalised. */
+export async function odooGet<T>(path: string): Promise<{ status: number; data: T }> {
+  return odooRequest<T>("GET", path, undefined, {});
+}
+
 export async function odooPost<T>(
   path: string,
   body: unknown,
   headers: Record<string, string> = {},
+): Promise<{ status: number; data: T }> {
+  return odooRequest<T>("POST", path, body, headers);
+}
+
+async function odooRequest<T>(
+  method: "GET" | "POST",
+  path: string,
+  body: unknown,
+  headers: Record<string, string>,
 ): Promise<{ status: number; data: T }> {
   const { base, token, database, timeout } = config();
   const url = new URL(base + path);
@@ -36,9 +49,9 @@ export async function odooPost<T>(
   const timer = setTimeout(() => controller.abort(), timeout);
   try {
     const res = await fetch(url, {
-      method: "POST",
+      method,
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, ...headers },
-      body: JSON.stringify(body),
+      ...(method === "POST" ? { body: JSON.stringify(body) } : {}),
       signal: controller.signal,
       cache: "no-store",
     });
