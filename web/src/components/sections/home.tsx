@@ -5,7 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { CONTACT_EMAIL } from "@/components/layout/site-nav";
 import { JoinVolunteerButton } from "@/components/ui/button";
+import { GALLERY } from "@/lib/gallery";
 import { images } from "@/lib/utils";
+import { PhotoGallery } from "./photo-gallery";
 import { Section } from "./page-hero";
 
 const Eyebrow = ({ children, tone = "saffron" }: { children: string; tone?: "saffron" | "green" | "light" }) => (
@@ -215,6 +217,24 @@ export function Impact() {
         </div>
       </div>
     </section>
+  );
+}
+
+export function OurMoments() {
+  return (
+    <Section tone="tint">
+      <div className="reveal mx-auto mb-12 max-w-2xl text-center">
+        <Eyebrow>Our Moments</Eyebrow>
+        <h2 className="mt-3.5 text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-[44px]">Snapshots of community spirit</h2>
+        <p className="mt-3 text-slate-600">Vibrant cultural celebrations and seva activities across Saudi Arabia.</p>
+      </div>
+      <PhotoGallery photos={GALLERY} limit={6} />
+      <div className="mt-10 text-center">
+        <Link href="/gallery" className="btn-lift inline-flex items-center gap-2 rounded-full border-2 border-navy-900 px-7 py-3.5 text-[15px] font-bold text-navy-900 hover:bg-navy-900 hover:text-white">
+          View full gallery <ArrowRight className="size-4" aria-hidden />
+        </Link>
+      </div>
+    </Section>
   );
 }
 

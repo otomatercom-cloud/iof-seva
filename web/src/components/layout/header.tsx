@@ -18,7 +18,7 @@ export function Header() {
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:rounded focus:bg-white focus:p-2">
         Skip to content
       </a>
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3" aria-label="India Overseas Forum home">
           <Image src={images.logo} alt="" width={40} height={40} className="size-10 object-contain" />
           <span className="text-base font-bold leading-tight text-navy-900">
@@ -34,7 +34,7 @@ export function Header() {
               href={item.href}
               aria-current={pathname === item.href ? "page" : undefined}
               className={cn(
-                "rounded-full px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-navy-50 hover:text-navy-900",
+                "rounded-full px-2.5 py-2 text-sm font-medium text-slate-700 transition hover:bg-navy-50 hover:text-navy-900",
                 pathname === item.href && "bg-navy-50 text-navy-900",
               )}
             >

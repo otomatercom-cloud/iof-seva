@@ -1,10 +1,10 @@
 import { Droplet, GraduationCap, HeartPulse, LifeBuoy, Utensils } from "lucide-react";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { PageHero, Section } from "@/components/sections/page-hero";
-import { JoinVolunteerButton } from "@/components/ui/button";
+import { ButtonLink, JoinVolunteerButton } from "@/components/ui/button";
 import { FeatureCard } from "@/components/ui/card";
-import { images } from "@/lib/utils";
+import { GALLERY } from "@/lib/gallery";
+import { PhotoGallery } from "@/components/sections/photo-gallery";
 
 export const metadata: Metadata = { title: "Seva Activities" };
 
@@ -23,14 +23,11 @@ export default function SevaActivitiesPage() {
         </div>
       </Section>
       <Section tone="tint" title="Gallery" intro="Snapshots of community moments and seva activities.">
-        <div className="grid gap-4 sm:grid-cols-3">
-          {images.moments.map((src, n) => (
-            <div key={src} className="relative aspect-square overflow-hidden rounded-2xl">
-              <Image src={src} alt={`Community moment ${n + 1}`} fill sizes="(min-width:640px) 33vw, 100vw" className="object-cover" />
-            </div>
-          ))}
+        <PhotoGallery photos={GALLERY} limit={6} />
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <ButtonLink href="/gallery" variant="secondary">View full gallery</ButtonLink>
+          <JoinVolunteerButton />
         </div>
-        <div className="mt-10 text-center"><JoinVolunteerButton /></div>
       </Section>
     </>
   );

@@ -1,5 +1,5 @@
 import {
-  CollabAndReports, ContactStrip, Hero, Impact, Intro, Marquee, Pillars, VolunteerCta,
+  CollabAndReports, ContactStrip, Hero, Impact, Intro, Marquee, OurMoments, Pillars, VolunteerCta,
 } from "@/components/sections/home";
 
 export default function HomePage() {
@@ -10,6 +10,7 @@ export default function HomePage() {
       <Intro />
       <Pillars />
       <Impact />
+      <OurMoments />
       <VolunteerCta />
       <CollabAndReports />
       <ContactStrip />
