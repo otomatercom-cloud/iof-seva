@@ -18,7 +18,7 @@ Notes: card email needs outgoing mail server; PDF needs wkhtmltopdf; verify page
 
 ## Editing the website from Odoo (iof_site_content)
 
-Odoo menu **Website Content**: *Photo Gallery* (upload/reorder/hide photos), *Reports* (text + optional PDF),
+Odoo menu **Website Content**: *Events* (title, date/end date, time, place, details, photo, hide/show; shown in the home-page Events block, upcoming first then past), *Photo Gallery* (upload/reorder/hide photos), *Reports* (text + optional PDF),
 *Page Texts* (every heading/paragraph/button/menu label/contact detail/legal text, inline-editable, "Reset to default"),
 *Lists & Cards* (pillars, impact, FAQ, forums, services strip, tags, steps…, with icon picker). Logo and home photo are
 image rows in Page Texts. Groups: Editor (edit/create items) and Manager.

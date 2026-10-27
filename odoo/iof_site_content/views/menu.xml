@@ -2,6 +2,8 @@
 <odoo>
     <menuitem id="menu_iof_site_root" name="Website Content" sequence="41"
               groups="iof_site_content.group_iof_site_editor"/>
+    <menuitem id="menu_iof_site_events" name="Events" parent="menu_iof_site_root"
+              action="action_iof_site_event" sequence="5"/>
     <menuitem id="menu_iof_site_gallery" name="Photo Gallery" parent="menu_iof_site_root"
               action="action_iof_site_gallery" sequence="10"/>
     <menuitem id="menu_iof_site_reports" name="Reports" parent="menu_iof_site_root"
