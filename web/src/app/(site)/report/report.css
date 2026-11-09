@@ -1,0 +1,23 @@
+.rp{min-height:100vh;background:#f4faf6;padding:40px 16px}
+.rp .wrap{max-width:680px;margin:0 auto}
+.rp .back{font-size:14px;font-weight:500;color:#15803d}
+.rp h1{margin-top:12px;font-size:32px;font-weight:700;color:#10281c}
+.rp .lead{margin-top:8px;font-size:15px;line-height:1.6;color:#46604f}
+.rp form,.rp .done{margin-top:24px;background:#fff;border:1px solid #d7e3da;border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(16,40,28,.06)}
+.rp form>*+*{margin-top:20px}
+.rp .grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:600px){.rp .grid{grid-template-columns:1fr 1fr}}
+.rp label.l{display:block;font-size:14px;font-weight:500;color:#10281c}
+.rp input[type=text],.rp input[type=email],.rp input[type=tel],.rp input:not([type]),.rp select,.rp textarea{display:block;margin-top:6px;width:100%;border:1px solid #d7e3da;border-radius:10px;background:#fff;padding:10px 12px;font:inherit;font-size:15px;color:#10281c}
+.rp input:focus,.rp select:focus,.rp textarea:focus{outline:2px solid rgba(21,128,61,.25);border-color:#15803d}
+.rp .chk{display:flex;align-items:flex-start;gap:8px;font-size:14px}
+.rp .chk input{margin-top:3px}
+.rp .err{background:#fef2f2;color:#b42318;border-radius:10px;padding:8px 12px;font-size:14px}
+.rp button.send{width:100%;border:0;border-radius:10px;background:#15803d;color:#fff;padding:12px 16px;font:inherit;font-weight:600;cursor:pointer}
+.rp button.send:hover{background:#166534}.rp button.send:disabled{opacity:.6;cursor:default}
+.rp .hp{position:absolute;left:-9999px;width:0;height:0;opacity:0}
+.rp .done{text-align:center;padding:32px}
+.rp .tick{width:48px;height:48px;border-radius:50%;background:#dcfce7;color:#15803d;font-size:24px;display:grid;place-items:center;margin:0 auto 12px}
+.rp .done h2{font-size:20px;font-weight:600;color:#10281c}
+.rp .done p{margin-top:8px;color:#46604f}
+.rp .done .ref{font-size:26px;font-weight:700;color:#15803d;letter-spacing:.04em}

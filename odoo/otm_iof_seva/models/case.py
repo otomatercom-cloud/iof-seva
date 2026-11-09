@@ -95,6 +95,7 @@ class OtmIofCase(models.Model):
     # ---- workflow ------------------------------------------------------------------------------
     assignment_state = fields.Selection(ASSIGNMENT_STATES, default="draft", required=True, tracking=True, copy=False, index=True)
     source = fields.Selection([("portal", "Portal"), ("import", "Excel import"), ("website", "Website")], default="portal", readonly=True)
+    source_ip = fields.Char(readonly=True, copy=False, index=True, groups="otm_iof_seva.group_iof_secretary")
     submitted_date = fields.Datetime(readonly=True, copy=False)
     escalated_on = fields.Datetime(readonly=True, copy=False)
     handling_region = fields.Selection(related="handling_committee_id.region", string="Responsible Region", store=True, index=True)

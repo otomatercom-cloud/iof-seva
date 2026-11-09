@@ -191,7 +191,7 @@ export interface Case {
   createdById: string;
   updatedAt: string;
   resolvedAt?: string;
-  source: "excel" | "portal";
+  source: "excel" | "portal" | "website";
   timeline: TimelineEvent[];
   documents: CaseDocument[];
   /** set by Odoo (authoritative); absent in demo mode */

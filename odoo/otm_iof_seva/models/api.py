@@ -104,7 +104,7 @@ class OtmIofApi(models.AbstractModel):
             "oldStatus": c.old_status or "", "status": c.status, "assignment": c.assignment_state,
             "originalReportingProvince": c.reported_from_id.code or "IOF-NC", "createdById": str(c.create_uid.id),
             "updatedAt": _iso(c.write_date), "resolvedAt": _iso(c.resolved_on) or None,
-            "source": "excel" if c.source == "import" else "portal",
+            "source": "excel" if c.source == "import" else c.source,
             "canAssign": c.can_assign, "canUpdate": c.can_update, "resolutionNote": c.resolution_note or "",
             "timeline": [], "documents": [], "finance": [], "assignments": [],
         }
@@ -216,7 +216,7 @@ class OtmIofApi(models.AbstractModel):
         q = (p.get("q") or "").strip()
         if q:
             paths = ["case_no", "name", "victim_name", "contact_details", "sponsor_name", "state_india", "district_india",
-                     "issue_type_id.name", "handled_by_id.name"]
+                     "issue_type_id.name", "handled_by_id.name", "reporting_person", "victim_contact"]
             d += ["|"] * (len(paths) - 1) + [(f, "ilike", q) for f in paths]
         if p.get("province"):
             d += ["|", ("handling_committee_id.code", "=", p["province"]), ("reported_from_id.code", "=", p["province"])]

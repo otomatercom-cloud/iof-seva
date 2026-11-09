@@ -135,7 +135,7 @@ export function SiteHome() {
 
       {/* CAUSES */}
       <section id="causes"><div className="container">
-        <div className="sec-head rv"><div><Head k="causes" /></div><a href="#contact" className="btn btn-dark">Report a case <span className="arr">→</span></a></div>
+        <div className="sec-head rv"><div><Head k="causes" /></div><Link href="/report" className="btn btn-dark">Report a case <span className="arr">→</span></Link></div>
         <div className="don-grid">
           {C.causes.map((c, i) => (
             <article key={i} className={`don rv ${i % 2 ? "r" : "l"} d${(i >> 1) + 1}`}><div className="thumb"><div className="art" style={{ background: bgOf(c.image, i) }} /></div>
@@ -193,7 +193,7 @@ export function SiteHome() {
       <section className="blog" id="contact"><div className="container">
         <div className="sec-head center rv"><Head k="contact" /></div>
         <div className="cards3">
-          {[["Report a case", `Call ${CONTACT.phone} or write to ${CONTACT.email} with the person’s name, location and the problem.`, "mailto:" + CONTACT.email, "Email us"], ["Volunteer", "Join your local committee as a coordinator or case handler and help families in crisis.", "mailto:" + CONTACT.email + "?subject=Volunteer", "Offer to help"], ["IOF staff & coordinators", "Sign in to the Seva case-management portal to register, assign and update cases.", "/login", "Seva Portal Login"]].map(([tt, d, h, b], i) => (
+          {[["Report a case", `Call ${CONTACT.phone} or write to ${CONTACT.email} with the person’s name, location and the problem.`, "/report", "Report online"], ["Volunteer", "Join your local committee as a coordinator or case handler and help families in crisis.", "mailto:" + CONTACT.email + "?subject=Volunteer", "Offer to help"], ["IOF staff & coordinators", "Sign in to the Seva case-management portal to register, assign and update cases.", "/login", "Seva Portal Login"]].map(([tt, d, h, b], i) => (
             <article key={tt} className={`post rv d${i + 1}`}><div className="tx" style={{ padding: 34 }}><h3>{tt}</h3><p style={{ color: "var(--muted)", marginBottom: 18 }}>{d}</p>{String(h).startsWith("/") ? <Link className="rm" href={h}>{b} →</Link> : <a className="rm" href={h}>{b} →</a>}</div></article>
           ))}
         </div>
