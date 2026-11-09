@@ -1,0 +1,18 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_committee_user,otm.iof.committee user,model_otm_iof_committee,group_iof_handler,1,0,0,0
+access_committee_president,otm.iof.committee president,model_otm_iof_committee,group_iof_president,1,1,1,1
+access_issue_type_user,otm.iof.issue.type user,model_otm_iof_issue_type,group_iof_handler,1,0,0,0
+access_issue_type_president,otm.iof.issue.type president,model_otm_iof_issue_type,group_iof_president,1,1,1,1
+access_case_user,otm.iof.case user,model_otm_iof_case,group_iof_handler,1,1,1,1
+access_event_user,otm.iof.case.event user,model_otm_iof_case_event,group_iof_handler,1,0,1,0
+access_assignment_user,otm.iof.case.assignment user,model_otm_iof_case_assignment,group_iof_handler,1,0,0,0
+access_finance_user,otm.iof.case.finance user,model_otm_iof_case_finance,group_iof_handler,1,1,1,0
+access_finance_coord,otm.iof.case.finance coordinator,model_otm_iof_case_finance,group_iof_coordinator,1,1,1,1
+access_document_user,otm.iof.case.document user,model_otm_iof_case_document,group_iof_handler,1,1,1,1
+access_transfer_user,otm.iof.transfer user,model_otm_iof_transfer,group_iof_handler,1,0,0,0
+access_assign_wizard,otm.iof.assign.wizard,model_otm_iof_assign_wizard,group_iof_handler,1,1,1,1
+access_transfer_wizard,otm.iof.transfer.wizard,model_otm_iof_transfer_wizard,group_iof_handler,1,1,1,1
+access_status_wizard,otm.iof.status.wizard,model_otm_iof_status_wizard,group_iof_handler,1,1,1,1
+access_import_wizard,otm.iof.import.wizard,model_otm_iof_import_wizard,group_iof_president,1,1,1,1
+access_site_content_user,otm.iof.site.content user,model_otm_iof_site_content,group_iof_handler,1,0,0,0
+access_site_content_president,otm.iof.site.content president,model_otm_iof_site_content,group_iof_president,1,1,1,1

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="cron_iof_unassigned_escalation" model="ir.cron">
+        <field name="name">IOF Seva: escalate cases waiting for assignment</field>
+        <field name="model_id" ref="model_otm_iof_case"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_escalate_unassigned()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active" eval="True"/>
+    </record>
+    <record id="param_unassigned_days" model="ir.config_parameter">
+        <field name="key">otm_iof_seva.unassigned_days</field>
+        <field name="value">2</field>
+    </record>
+</odoo>

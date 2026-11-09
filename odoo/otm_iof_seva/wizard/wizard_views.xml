@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_iof_assign_wizard_form" model="ir.ui.view">
+        <field name="name">otm.iof.assign.wizard.form</field>
+        <field name="model">otm.iof.assign.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="case_id" readonly="1"/>
+                    <field name="region" invisible="1"/>
+                    <field name="user_id" domain="[('iof_committee_id.region', '=', region), ('share', '=', False)]"/>
+                    <field name="note"/>
+                </group>
+                <footer>
+                    <button name="action_assign" type="object" string="Assign" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_iof_transfer_wizard_form" model="ir.ui.view">
+        <field name="name">otm.iof.transfer.wizard.form</field>
+        <field name="model">otm.iof.transfer.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="case_id" readonly="1"/>
+                    <field name="to_committee_id"/>
+                    <field name="reason"/>
+                </group>
+                <p class="text-muted">The original reporting committee is always preserved. Province Heads, the Secretary and the
+                    President move the case directly; others file a request for the destination Province Head.</p>
+                <footer>
+                    <button name="action_transfer" type="object" string="Transfer" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_iof_status_wizard_form" model="ir.ui.view">
+        <field name="name">otm.iof.status.wizard.form</field>
+        <field name="model">otm.iof.status.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="case_id" readonly="1"/>
+                    <field name="current_status" readonly="1"/>
+                    <field name="new_status"/>
+                    <field name="note"/>
+                </group>
+                <footer>
+                    <button name="action_apply" type="object" string="Apply" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_iof_import_wizard_form" model="ir.ui.view">
+        <field name="name">otm.iof.import.wizard.form</field>
+        <field name="model">otm.iof.import.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="file" filename="filename"/>
+                    <field name="filename" invisible="1"/>
+                </group>
+                <p class="text-muted">Import the first sheet of the IOF Seva Register (header row starts with “SL”). Empty pre-numbered rows
+                    are skipped, values are trimmed, existing SL numbers are never duplicated.</p>
+                <footer>
+                    <button name="action_import" type="object" string="Import" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_iof_import" model="ir.actions.act_window">
+        <field name="name">Import Excel Register</field>
+        <field name="res_model">otm.iof.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+{
+    "name": "IOF Seva – Case Management",
+    "summary": "Seva case register, cross-province assignment, transfers and audit trail for India Overseas Forum",
+    "description": "Backend for the IOF Seva portal: committees, issue types, case register (Excel-compatible), "
+                   "assignment & transfer workflow, status rules, timeline, Excel import and SLA escalation.",
+    "version": "19.0.1.0.0",
+    "category": "Customizations",
+    "author": "Otomater",
+    "website": "https://otomater.com",
+    "license": "OPL-1",
+    "depends": ["base", "mail"],
+    "data": [
+        "security/groups.xml",
+        "security/ir.model.access.csv",
+        "security/rules.xml",
+        "data/sequence_data.xml",
+        "data/committee_data.xml",
+        "data/issue_type_data.xml",
+        "data/cron_data.xml",
+        "views/committee_views.xml",
+        "views/issue_type_views.xml",
+        "views/case_views.xml",
+        "views/transfer_views.xml",
+        "views/res_users_views.xml",
+        "wizard/wizard_views.xml",
+        "views/menus.xml",
+    ],
+    "application": True,
+    "installable": True,
+}

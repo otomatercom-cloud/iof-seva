@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_iof_root" name="IOF Seva" sequence="40" groups="group_iof_handler"/>
+
+    <menuitem id="menu_iof_cases" name="Cases" parent="menu_iof_root" sequence="10" groups="group_iof_handler"/>
+    <menuitem id="menu_iof_case_all" name="All Cases" parent="menu_iof_cases" action="action_iof_case" sequence="10" groups="group_iof_handler"/>
+    <menuitem id="menu_iof_case_mine" name="My Assigned Cases" parent="menu_iof_cases" action="action_iof_case_mine" sequence="20" groups="group_iof_handler"/>
+
+    <menuitem id="menu_iof_assignment" name="Case Assignment" parent="menu_iof_root" sequence="20" groups="group_iof_coordinator"/>
+    <menuitem id="menu_iof_queue" name="Assignment Queue" parent="menu_iof_assignment" action="action_iof_case_awaiting" sequence="10" groups="group_iof_coordinator"/>
+    <menuitem id="menu_iof_transfers" name="Transfer Requests" parent="menu_iof_assignment" action="action_iof_transfer" sequence="20" groups="group_iof_coordinator"/>
+
+    <menuitem id="menu_iof_config" name="Configuration" parent="menu_iof_root" sequence="90" groups="group_iof_president"/>
+    <menuitem id="menu_iof_committees" name="Committees" parent="menu_iof_config" action="action_iof_committee" sequence="10" groups="group_iof_president"/>
+    <menuitem id="menu_iof_issue_types" name="Issue Types" parent="menu_iof_config" action="action_iof_issue_type" sequence="20" groups="group_iof_president"/>
+    <menuitem id="menu_iof_import" name="Import Excel Register" parent="menu_iof_config" action="action_iof_import" sequence="30" groups="group_iof_president"/>
+</odoo>

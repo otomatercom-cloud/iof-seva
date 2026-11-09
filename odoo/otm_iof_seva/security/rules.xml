@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- CASE: record rules are OR-ed per group; the implied chain means the broadest group a user holds wins. -->
+    <record id="rule_case_national" model="ir.rule">
+        <field name="name">IOF case: President / Secretary – all provinces (others' drafts hidden)</field>
+        <field name="model_id" ref="model_otm_iof_case"/>
+        <field name="groups" eval="[(4, ref('group_iof_secretary'))]"/>
+        <field name="domain_force">['|', ('assignment_state', '!=', 'draft'), ('create_uid', '=', user.id)]</field>
+    </record>
+    <record id="rule_case_head" model="ir.rule">
+        <field name="name">IOF case: Province Head – own region (handling or reporting)</field>
+        <field name="model_id" ref="model_otm_iof_case"/>
+        <field name="groups" eval="[(4, ref('group_iof_head'))]"/>
+        <field name="domain_force">['&amp;', '|', ('handling_region', '=', user.iof_committee_id.region), ('reported_region', '=', user.iof_committee_id.region), '|', ('assignment_state', '!=', 'draft'), ('create_uid', '=', user.id)]</field>
+    </record>
+    <record id="rule_case_coordinator" model="ir.rule">
+        <field name="name">IOF case: Coordinator – own committee, created or handled by me</field>
+        <field name="model_id" ref="model_otm_iof_case"/>
+        <field name="groups" eval="[(4, ref('group_iof_coordinator'))]"/>
+        <field name="domain_force">['&amp;', '|', '|', '|', ('handling_committee_id', '=', user.iof_committee_id.id or -1), ('reported_from_id', '=', user.iof_committee_id.id or -1), ('create_uid', '=', user.id), ('handled_by_id', '=', user.id), '|', ('assignment_state', '!=', 'draft'), ('create_uid', '=', user.id)]</field>
+    </record>
+    <record id="rule_case_handler" model="ir.rule">
+        <field name="name">IOF case: Handler – assigned to me or created by me</field>
+        <field name="model_id" ref="model_otm_iof_case"/>
+        <field name="groups" eval="[(4, ref('group_iof_handler'))]"/>
+        <field name="domain_force">['|', ('handled_by_id', '=', user.id), ('create_uid', '=', user.id)]</field>
+    </record>
+
+    <!-- CHILD MODELS follow the parent case's visibility -->
+    <record id="rule_event_follow_case" model="ir.rule">
+        <field name="name">IOF event: follows case (staff see internal remarks)</field>
+        <field name="model_id" ref="model_otm_iof_case_event"/>
+        <field name="groups" eval="[(4, ref('group_iof_coordinator'))]"/>
+        <field name="domain_force">[('case_id', 'any', [])]</field>
+    </record>
+    <record id="rule_event_handler" model="ir.rule">
+        <field name="name">IOF event: Handler – no internal remarks</field>
+        <field name="model_id" ref="model_otm_iof_case_event"/>
+        <field name="groups" eval="[(4, ref('group_iof_handler'))]"/>
+        <field name="domain_force">['&amp;', ('is_internal', '=', False), ('case_id', 'any', [])]</field>
+    </record>
+    <record id="rule_assignment_follow_case" model="ir.rule">
+        <field name="name">IOF assignment history: follows case</field>
+        <field name="model_id" ref="model_otm_iof_case_assignment"/>
+        <field name="groups" eval="[(4, ref('group_iof_handler'))]"/>
+        <field name="domain_force">[('case_id', 'any', [])]</field>
+    </record>
+    <record id="rule_finance_follow_case" model="ir.rule">
+        <field name="name">IOF finance: follows case</field>
+        <field name="model_id" ref="model_otm_iof_case_finance"/>
+        <field name="groups" eval="[(4, ref('group_iof_handler'))]"/>
+        <field name="domain_force">[('case_id', 'any', [])]</field>
+    </record>
+    <record id="rule_document_follow_case" model="ir.rule">
+        <field name="name">IOF document: follows case</field>
+        <field name="model_id" ref="model_otm_iof_case_document"/>
+        <field name="groups" eval="[(4, ref('group_iof_handler'))]"/>
+        <field name="domain_force">[('case_id', 'any', [])]</field>
+    </record>
+    <record id="rule_transfer_follow_case" model="ir.rule">
+        <field name="name">IOF transfer: case visibility, or destination region (for decision)</field>
+        <field name="model_id" ref="model_otm_iof_transfer"/>
+        <field name="groups" eval="[(4, ref('group_iof_handler'))]"/>
+        <field name="domain_force">['|', ('case_id', 'any', []), '&amp;', ('to_region', '=', user.iof_committee_id.region), ('to_region', '!=', False)]</field>
+    </record>
+</odoo>

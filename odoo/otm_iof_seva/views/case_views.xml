@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_iof_case_list" model="ir.ui.view">
+        <field name="name">otm.iof.case.list</field>
+        <field name="model">otm.iof.case</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="priority == 'critical'" decoration-muted="status == 'closed_finance'">
+                <field name="case_no"/>
+                <field name="name"/>
+                <field name="issue_type_id"/>
+                <field name="reported_from_id" optional="show"/>
+                <field name="handling_committee_id"/>
+                <field name="handled_by_id"/>
+                <field name="registration_date"/>
+                <field name="priority" widget="badge"/>
+                <field name="assignment_state" widget="badge" optional="show"/>
+                <field name="status" widget="badge"/>
+                <field name="write_date" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_iof_case_form" model="ir.ui.view">
+        <field name="name">otm.iof.case.form</field>
+        <field name="model">otm.iof.case</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_submit" type="object" string="Submit Case" class="btn-primary" invisible="assignment_state != 'draft'"/>
+                    <button name="action_open_assign" type="object" string="Assign" class="btn-primary" invisible="not can_assign"/>
+                    <button name="action_open_transfer" type="object" string="Transfer" invisible="assignment_state in ('draft', 'transfer_pending') or status in ('completed', 'closed_finance') or not can_update"/>
+                    <button name="action_open_status" type="object" string="Change Status" invisible="assignment_state in ('draft', 'transfer_pending') or not can_update"/>
+                    <field name="assignment_state" widget="statusbar" statusbar_visible="draft,awaiting_assignment,assigned"/>
+                </header>
+                <sheet>
+                    <field name="can_assign" invisible="1"/>
+                    <field name="can_update" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_transfers" type="object" class="oe_stat_button" icon="fa-exchange" invisible="transfer_count == 0">
+                            <field name="transfer_count" widget="statinfo" string="Transfers"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="case_no" placeholder="Draft"/></h1>
+                        <h2><field name="name" placeholder="Case name / title"/></h2>
+                    </div>
+                    <group>
+                        <group name="grp_main">
+                            <field name="issue_type_id"/>
+                            <field name="priority"/>
+                            <field name="status" widget="badge" readonly="1"/>
+                            <field name="registration_date"/>
+                            <field name="summary"/>
+                        </group>
+                        <group name="grp_routing">
+                            <field name="reported_from_id" readonly="assignment_state != 'draft'"/>
+                            <field name="reported_external" readonly="assignment_state != 'draft'"/>
+                            <field name="handling_committee_id" readonly="assignment_state != 'draft'"/>
+                            <field name="handled_by_id" readonly="assignment_state != 'draft'"/>
+                            <field name="contact_details"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Case Information" name="page_info">
+                            <group>
+                                <group string="Reporting">
+                                    <field name="reporting_person"/>
+                                    <field name="reporting_coordinator_id"/>
+                                    <field name="reference_by"/>
+                                    <field name="reference_details"/>
+                                </group>
+                                <group string="Location">
+                                    <field name="country"/>
+                                    <field name="area_ksa"/>
+                                    <field name="state_india"/>
+                                    <field name="district_india"/>
+                                    <field name="village"/>
+                                    <field name="full_address"/>
+                                </group>
+                            </group>
+                            <group string="Case in details">
+                                <field name="details" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Victim" name="page_victim">
+                            <group>
+                                <group>
+                                    <field name="victim_name"/>
+                                    <field name="victim_contact"/>
+                                    <field name="alternate_contact"/>
+                                    <field name="local_id_passport"/>
+                                </group>
+                                <group>
+                                    <field name="dependents"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Sponsor" name="page_sponsor">
+                            <group>
+                                <field name="sponsor_name"/>
+                                <field name="sponsor_mobile"/>
+                                <field name="sponsor_details"/>
+                            </group>
+                        </page>
+                        <page string="IOF Seva" name="page_seva">
+                            <group>
+                                <field name="iof_involvement"/>
+                                <field name="others_involvement"/>
+                                <field name="seva_support"/>
+                                <field name="financial_expenses"/>
+                                <field name="remarks"/>
+                                <field name="resolution_note"/>
+                            </group>
+                        </page>
+                        <page string="Financial" name="page_finance">
+                            <field name="finance_ids">
+                                <list editable="bottom">
+                                    <field name="date"/>
+                                    <field name="description"/>
+                                    <field name="amount_sar" sum="Total"/>
+                                    <field name="paid_by"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Documents" name="page_documents">
+                            <field name="document_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="kind"/>
+                                    <field name="file" filename="filename"/>
+                                    <field name="filename" column_invisible="True"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Timeline" name="page_timeline">
+                            <field name="event_ids">
+                                <list editable="bottom" edit="0" delete="0">
+                                    <field name="date" readonly="1"/>
+                                    <field name="author_id" readonly="1"/>
+                                    <field name="event_type"/>
+                                    <field name="text"/>
+                                    <field name="is_internal"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Assignment History" name="page_assignments">
+                            <field name="assignment_ids">
+                                <list create="0" edit="0" delete="0">
+                                    <field name="date"/>
+                                    <field name="by_id"/>
+                                    <field name="to_id"/>
+                                    <field name="committee_id"/>
+                                    <field name="note"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_iof_case_search" model="ir.ui.view">
+        <field name="name">otm.iof.case.search</field>
+        <field name="model">otm.iof.case</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="case_no"/>
+                <field name="name"/>
+                <field name="victim_name"/>
+                <field name="victim_contact"/>
+                <field name="local_id_passport"/>
+                <field name="sponsor_name"/>
+                <field name="handling_committee_id"/>
+                <field name="handled_by_id"/>
+                <filter name="mine" string="My Assigned Cases" domain="[('handled_by_id', '=', uid)]"/>
+                <filter name="awaiting" string="Awaiting Assignment" domain="[('assignment_state', '=', 'awaiting_assignment')]"/>
+                <filter name="drafts" string="My Drafts" domain="[('assignment_state', '=', 'draft'), ('create_uid', '=', uid)]"/>
+                <filter name="critical" string="Critical" domain="[('priority', '=', 'critical')]"/>
+                <separator/>
+                <filter name="pending" string="Pending (external)" domain="[('status', 'in', ('pending_judiciary', 'pending_sponsor', 'pending_indian_authority', 'pending_police', 'pending_medical'))]"/>
+                <filter name="resolved" string="Resolved / Closed" domain="[('status', 'in', ('completed', 'closed_finance'))]"/>
+                <group>
+                    <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
+                    <filter name="group_committee" string="Responsible Committee" context="{'group_by': 'handling_committee_id'}"/>
+                    <filter name="group_issue" string="Issue Type" context="{'group_by': 'issue_type_id'}"/>
+                    <filter name="group_priority" string="Priority" context="{'group_by': 'priority'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_iof_case" model="ir.actions.act_window">
+        <field name="name">All Cases</field>
+        <field name="res_model">otm.iof.case</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_iof_case_mine" model="ir.actions.act_window">
+        <field name="name">My Assigned Cases</field>
+        <field name="res_model">otm.iof.case</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_mine': 1}</field>
+    </record>
+    <record id="action_iof_case_awaiting" model="ir.actions.act_window">
+        <field name="name">Assignment Queue</field>
+        <field name="res_model">otm.iof.case</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_awaiting': 1}</field>
+    </record>
+</odoo>

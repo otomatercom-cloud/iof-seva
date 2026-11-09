@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="committee_iof_nc" model="otm.iof.committee">
+        <field name="code">IOF-NC</field>
+        <field name="name">National Committee</field>
+        <field name="region">NC</field>
+        <field name="kind">national</field>
+        <field name="case_prefix">IOF-NC</field>
+    </record>
+    <record id="committee_iof_ep" model="otm.iof.committee">
+        <field name="code">IOF-EP</field>
+        <field name="name">Eastern Province</field>
+        <field name="region">EP</field>
+        <field name="kind">region</field>
+        <field name="case_prefix">IOF-EP</field>
+    </record>
+    <record id="committee_iof_ep_dammam" model="otm.iof.committee">
+        <field name="code">IOF-EP-Dammam</field>
+        <field name="name">Eastern Province · Dammam</field>
+        <field name="region">EP</field>
+        <field name="kind">chapter</field>
+        <field name="case_prefix">IOF-EP</field>
+        <field name="parent_id" ref="committee_iof_ep"/>
+    </record>
+    <record id="committee_iof_ep_jubail" model="otm.iof.committee">
+        <field name="code">IOF-EP-Jubail</field>
+        <field name="name">Eastern Province · Jubail</field>
+        <field name="region">EP</field>
+        <field name="kind">chapter</field>
+        <field name="case_prefix">IOF-EP</field>
+        <field name="parent_id" ref="committee_iof_ep"/>
+    </record>
+    <record id="committee_iof_ep_alhasa" model="otm.iof.committee">
+        <field name="code">IOF-EP-AlHasa</field>
+        <field name="name">Eastern Province · Al-Hasa</field>
+        <field name="region">EP</field>
+        <field name="kind">chapter</field>
+        <field name="case_prefix">IOF-EP</field>
+        <field name="parent_id" ref="committee_iof_ep"/>
+    </record>
+    <record id="committee_iof_ep_kobhar" model="otm.iof.committee">
+        <field name="code">IOF-EP-Kobhar</field>
+        <field name="name">Eastern Province · Khobar</field>
+        <field name="region">EP</field>
+        <field name="kind">chapter</field>
+        <field name="case_prefix">IOF-EP</field>
+        <field name="parent_id" ref="committee_iof_ep"/>
+    </record>
+    <record id="committee_iof_cp" model="otm.iof.committee">
+        <field name="code">IOF-CP</field>
+        <field name="name">Central Province</field>
+        <field name="region">CP</field>
+        <field name="kind">region</field>
+        <field name="case_prefix">IOF-CP</field>
+    </record>
+    <record id="committee_iof_cp_riyad" model="otm.iof.committee">
+        <field name="code">IOF-CP-Riyad</field>
+        <field name="name">Central Province · Riyadh</field>
+        <field name="region">CP</field>
+        <field name="kind">chapter</field>
+        <field name="case_prefix">IOF-CP</field>
+        <field name="parent_id" ref="committee_iof_cp"/>
+    </record>
+    <record id="committee_iof_wp" model="otm.iof.committee">
+        <field name="code">IOF-WP</field>
+        <field name="name">Western Province</field>
+        <field name="region">WP</field>
+        <field name="kind">region</field>
+        <field name="case_prefix">IOF-WP</field>
+    </record>
+    <record id="committee_iof_wp_jeedha" model="otm.iof.committee">
+        <field name="code">IOF-WP-Jeedha</field>
+        <field name="name">Western Province · Jeddah</field>
+        <field name="region">WP</field>
+        <field name="kind">chapter</field>
+        <field name="case_prefix">IOF-WP</field>
+        <field name="parent_id" ref="committee_iof_wp"/>
+    </record>
+</odoo>

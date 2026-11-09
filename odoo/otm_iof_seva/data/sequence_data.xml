@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- ONE global serial (Excel "SL"). The visible case number is  <committee prefix>-<SL>. -->
+    <record id="seq_iof_case_sl" model="ir.sequence">
+        <field name="name">IOF Seva Case SL (global)</field>
+        <field name="code">otm.iof.case.sl</field>
+        <field name="prefix"></field>
+        <field name="padding">0</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+</odoo>

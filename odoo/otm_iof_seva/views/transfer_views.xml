@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_iof_transfer_list" model="ir.ui.view">
+        <field name="name">otm.iof.transfer.list</field>
+        <field name="model">otm.iof.transfer</field>
+        <field name="arch" type="xml">
+            <list decoration-warning="state == 'pending'" decoration-success="state == 'accepted'" decoration-danger="state == 'rejected'">
+                <field name="date"/>
+                <field name="case_no"/>
+                <field name="case_name"/>
+                <field name="from_committee_id"/>
+                <field name="to_committee_id"/>
+                <field name="requested_by_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_iof_transfer_form" model="ir.ui.view">
+        <field name="name">otm.iof.transfer.form</field>
+        <field name="model">otm.iof.transfer</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0" delete="0">
+                <header>
+                    <button name="action_accept" type="object" string="Accept" class="btn-primary" invisible="state != 'pending'"/>
+                    <button name="action_reject" type="object" string="Reject" invisible="state != 'pending'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,accepted"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="case_no"/>
+                            <field name="case_name"/>
+                            <field name="case_issue"/>
+                            <field name="from_committee_id"/>
+                            <field name="to_committee_id"/>
+                        </group>
+                        <group>
+                            <field name="requested_by_id"/>
+                            <field name="date"/>
+                            <field name="decided_by_id"/>
+                            <field name="decided_date"/>
+                            <field name="decision_note"/>
+                        </group>
+                    </group>
+                    <group string="Reason for transfer">
+                        <field name="reason" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_iof_transfer_search" model="ir.ui.view">
+        <field name="name">otm.iof.transfer.search</field>
+        <field name="model">otm.iof.transfer</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="case_no"/>
+                <field name="case_name"/>
+                <filter name="pending" string="Pending" domain="[('state', '=', 'pending')]"/>
+                <separator/>
+                <group>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_to" string="Destination" context="{'group_by': 'to_committee_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_iof_transfer" model="ir.actions.act_window">
+        <field name="name">Transfer Requests</field>
+        <field name="res_model">otm.iof.transfer</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_pending': 1}</field>
+    </record>
+</odoo>

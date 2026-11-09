@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="issue_type_1" model="otm.iof.issue.type">
+        <field name="name">Work contract issue</field>
+        <field name="category">Labour</field>
+        <field name="description">Contract violation, unpaid wages, final exit disputes.</field>
+        <field name="default_priority">medium</field>
+    </record>
+    <record id="issue_type_2" model="otm.iof.issue.type">
+        <field name="name">Jailed - financial issue</field>
+        <field name="category">Legal</field>
+        <field name="description">Detained over debts, cheques or financial claims.</field>
+        <field name="default_priority">high</field>
+    </record>
+    <record id="issue_type_3" model="otm.iof.issue.type">
+        <field name="name">Jailed - violent Crime</field>
+        <field name="category">Legal</field>
+        <field name="description">Detained in connection with a violent-crime allegation.</field>
+        <field name="default_priority">critical</field>
+    </record>
+    <record id="issue_type_4" model="otm.iof.issue.type">
+        <field name="name">Jailed Labour Issue</field>
+        <field name="category">Legal</field>
+        <field name="description">Detained over labour-law or iqama/visa violations.</field>
+        <field name="default_priority">high</field>
+    </record>
+    <record id="issue_type_5" model="otm.iof.issue.type">
+        <field name="name">Hospitalized</field>
+        <field name="category">Medical</field>
+        <field name="description">Hospital admission, treatment support, medical repatriation.</field>
+        <field name="default_priority">high</field>
+    </record>
+    <record id="issue_type_6" model="otm.iof.issue.type">
+        <field name="name">Death - Natural</field>
+        <field name="category">Death &amp; Repatriation</field>
+        <field name="description">Natural death – documentation and remains repatriation.</field>
+        <field name="default_priority">high</field>
+    </record>
+    <record id="issue_type_7" model="otm.iof.issue.type">
+        <field name="name">Death - UnNatural</field>
+        <field name="category">Death &amp; Repatriation</field>
+        <field name="description">Accident, suicide or suspicious death – police and embassy process.</field>
+        <field name="default_priority">critical</field>
+    </record>
+</odoo>
