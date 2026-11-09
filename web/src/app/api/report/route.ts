@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { ODOO_URL } from "@/lib/server/odoo";
+import { ODOO_URL, sameOrigin, tooBig } from "@/lib/server/odoo";
 
 const H = () => ({ "Content-Type": "application/json", "X-IOF-Key": process.env.IOF_PUBLIC_KEY ?? "" });
 
@@ -13,6 +13,7 @@ export async function GET() {
 
 /** Public: submit a report. The visitor's IP is forwarded for the per-IP rate limit. */
 export async function POST(req: Request) {
+  if (!sameOrigin(req) || tooBig(req, 1)) return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   const body = await req.json().catch(() => ({}));
   const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || req.headers.get("x-real-ip") || "unknown";
   try {

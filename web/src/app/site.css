@@ -24,7 +24,7 @@
 .site .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:55px}
 .site .sec-head.center{flex-direction:column;align-items:center;text-align:center}
 .site .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:50px;font-weight:600;border:2px solid transparent;cursor:pointer;transition:.35s;position:relative;overflow:hidden;font-family:inherit;font-size:1rem}
-.site .btn-primary{background:var(--orange);color:#fff}
+.site .btn-primary{background:var(--orange);color:#2b1700}
 .site .btn-primary:hover{background:var(--green);transform:translateY(-3px);box-shadow:var(--shadow)}
 .site .btn-outline{border-color:rgba(255,255,255,.55);color:#fff}
 .site .btn-outline:hover{background:#fff;color:var(--green)}

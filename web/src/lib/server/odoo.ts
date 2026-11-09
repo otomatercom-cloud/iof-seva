@@ -36,3 +36,23 @@ export async function callApi(sid: string, model: string, method: string, args: 
 export async function sessionId() {
   return (await cookies()).get(SID)?.value ?? null;
 }
+
+/** Cross-site request guard: browsers send Origin on POST; it must be this site. (Cookie is also SameSite=Lax.) */
+export function sameOrigin(req: Request) {
+  const o = req.headers.get("origin");
+  if (!o) return true;
+  try { return new URL(o).host === (req.headers.get("x-forwarded-host") ?? req.headers.get("host")); } catch { return false; }
+}
+export const tooBig = (req: Request, mb = 20) => Number(req.headers.get("content-length") ?? 0) > mb * 1024 * 1024;
+
+/** Simple in-memory brute-force limiter (per server process). */
+const hits = new Map<string, { n: number; t: number }>();
+export function limited(key: string, max: number, windowMs: number) {
+  const now = Date.now();
+  const h = hits.get(key);
+  if (!h || now - h.t > windowMs) { hits.set(key, { n: 1, t: now }); return false; }
+  h.n++;
+  if (hits.size > 5000) for (const [k, v] of hits) if (now - v.t > windowMs) hits.delete(k);
+  return h.n > max;
+}
+export const clearLimit = (key: string) => hits.delete(key);

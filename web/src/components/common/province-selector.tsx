@@ -20,7 +20,7 @@ export function ProvinceSelector({
     r, items: provinces.filter((p) => p.region === r && p.active && !exclude.includes(p.code)),
   }));
   return (
-    <Select id={id} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} aria-invalid={invalid}>
+    <Select id={id} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} aria-invalid={invalid} aria-label={id ? undefined : placeholder}>
       {groups.filter((g) => g.items.length).map((g) => (
         <optgroup key={g.r} label={REGIONS[g.r].name}>
           {g.items.map((p) => <option key={p.code} value={p.code}>{p.code} — {p.name}</option>)}

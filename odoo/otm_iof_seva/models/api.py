@@ -61,6 +61,7 @@ class OtmIofApi(models.AbstractModel):
         case = self.env["otm.iof.case"].browse(int(case_id)).exists()
         if not case:
             raise UserError(self.env._("Case not found or not accessible."))
+        case.check_access("read")  # explicit: never rely on the ORM cache for an authorisation decision
         return case
 
     def _committee(self, code):

@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
-import { ALLOWED, OdooError, callApi, sessionId } from "@/lib/server/odoo";
+import { ALLOWED, OdooError, callApi, sameOrigin, sessionId, tooBig } from "@/lib/server/odoo";
 
 /** BFF: the browser only ever calls whitelisted otm.iof.api methods with its own httpOnly session. */
 export async function POST(req: Request) {
+  if (!sameOrigin(req)) return NextResponse.json({ error: "Forbidden." }, { status: 403 });
+  if (tooBig(req)) return NextResponse.json({ error: "Request too large (max 20 MB)." }, { status: 413 });
   const { method, args } = await req.json().catch(() => ({}));
   if (!ALLOWED.has(method) || !Array.isArray(args ?? [])) return NextResponse.json({ error: "Unknown action." }, { status: 400 });
   const sid = await sessionId();

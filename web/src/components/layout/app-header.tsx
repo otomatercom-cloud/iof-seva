@@ -102,7 +102,7 @@ export function AppHeader({ onMenu }: { onMenu: () => void }) {
         )}
         <button onClick={() => setBell(true)} aria-label={`Notifications, ${unread} unread`} className="relative cursor-pointer rounded-lg p-2 text-slate-600 hover:bg-brand-50">
           <Bell className="size-5" />
-          {unread > 0 && <span className="absolute right-1 top-1 flex min-w-4 items-center justify-center rounded-full bg-saffron px-1 text-[10px] font-bold leading-4 text-white tabular">{unread > 9 ? "9+" : unread}</span>}
+          {unread > 0 && <span className="absolute right-1 top-1 flex min-w-4 items-center justify-center rounded-full bg-saffron px-1 text-[10px] font-bold leading-4 text-[#2b1700] tabular">{unread > 9 ? "9+" : unread}</span>}
         </button>
 
         <Dropdown>
