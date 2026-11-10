@@ -8,7 +8,7 @@ export const SID = "iof_sid";
 export const ALLOWED = new Set([
   "bootstrap", "get_case", "list_cases", "export_cases", "stats", "get_document", "register_case", "submit_case", "update_case", "assign", "transfer", "decide_transfer", "change_status",
   "add_timeline", "add_finance", "add_document", "upsert_issue_type", "toggle_issue_type", "toggle_committee", "set_prefix",
-  "upsert_user", "toggle_user", "mark_read",
+  "upsert_user", "toggle_user", "mark_read", "get_my_notify", "set_my_notify", "get_notify_events", "set_notify_event",
 ]);
 
 export class OdooError extends Error {

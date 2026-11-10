@@ -9,6 +9,9 @@
                 <page string="IOF Seva" name="page_iof_seva">
                     <group>
                         <field name="iof_committee_id"/>
+                        <field name="iof_notify_email"/>
+                        <field name="iof_notify_whatsapp"/>
+                        <field name="iof_whatsapp" invisible="not iof_notify_whatsapp"/>
                     </group>
                 </page>
             </xpath>

@@ -41,6 +41,9 @@ export interface User {
   provinceCode: string;
   active: boolean;
   title: string;
+  notifyEmail?: boolean;
+  notifyWhatsapp?: boolean;
+  whatsapp?: string;
 }
 
 export interface IssueType {

@@ -4,6 +4,8 @@ empty ids) and runs as the *logged-in user*, so all ir.rule / ACL / workflow gua
 The Next.js BFF whitelists this model; the browser never talks to Odoo directly."""
 import base64
 
+import re
+
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, UserError
 
@@ -75,6 +77,7 @@ class OtmIofApi(models.AbstractModel):
         return {
             "id": str(u.id), "name": u.name, "email": u.login if full else "", "phone": (u.phone or u.partner_id.phone or "") if full else "",
             "role": role, "provinceCode": u.iof_committee_id.code or "", "active": u.active,
+            "notifyEmail": u.iof_notify_email, "notifyWhatsapp": u.iof_notify_whatsapp, "whatsapp": (u.iof_whatsapp or "") if full else "",
             "title": "%s · %s" % (role.replace("_", " ").title(), (u.iof_committee_id.code or "").replace("IOF-", "")),
         }
 
@@ -483,12 +486,45 @@ class OtmIofApi(models.AbstractModel):
             vals["phone"] = u["phone"]
         if u.get("password"):
             vals["password"] = u["password"]
+        for key, fname in (("notifyEmail", "iof_notify_email"), ("notifyWhatsapp", "iof_notify_whatsapp")):
+            if key in u:
+                vals[fname] = bool(u[key])
+        if "whatsapp" in u:
+            vals["iof_whatsapp"] = (u["whatsapp"] or "").strip()
         if u.get("id"):
             Users.browse(int(u["id"])).write(vals)
         else:
             if not u.get("password"):
                 raise UserError(self.env._("Set an initial password for the new user."))
             Users.create(vals)
+        return True
+
+    @api.model
+    def get_my_notify(self):
+        u = self.env.user
+        return {"email": u.iof_notify_email, "whatsapp": u.iof_notify_whatsapp, "number": u.iof_whatsapp or ""}
+
+    @api.model
+    def set_my_notify(self, email, whatsapp, number):
+        number = (number or "").strip()
+        if whatsapp and not re.fullmatch(r"\+?\d{8,15}", number):
+            raise UserError(self.env._("Enter the WhatsApp number with country code, digits only."))
+        self.env.user.sudo().write({"iof_notify_email": bool(email), "iof_notify_whatsapp": bool(whatsapp), "iof_whatsapp": number})
+        return True
+
+    @api.model
+    def get_notify_events(self):
+        self._need_president()
+        return [{"code": e.code, "name": e.name, "email": e.email, "whatsapp": e.whatsapp}
+                for e in self.env["otm.iof.notify.event"].sudo().search([])]
+
+    @api.model
+    def set_notify_event(self, code, email, whatsapp):
+        self._need_president()
+        ev = self.env["otm.iof.notify.event"].sudo().search([("code", "=", code)], limit=1)
+        if not ev:
+            raise UserError(self.env._("Unknown event."))
+        ev.write({"email": bool(email), "whatsapp": bool(whatsapp)})
         return True
 
     @api.model

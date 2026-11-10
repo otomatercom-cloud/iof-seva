@@ -8,4 +8,5 @@ from . import case_finance
 from . import case_document
 from . import transfer
 from . import site_content
+from . import notify
 from . import api

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="notify_new_case" model="otm.iof.notify.event"><field name="code">new_case</field><field name="sequence">10</field><field name="email" eval="True"/><field name="whatsapp" eval="False"/></record>
+    <record id="notify_assigned" model="otm.iof.notify.event"><field name="code">assigned</field><field name="sequence">20</field><field name="email" eval="True"/><field name="whatsapp" eval="True"/></record>
+    <record id="notify_critical" model="otm.iof.notify.event"><field name="code">critical</field><field name="sequence">30</field><field name="email" eval="True"/><field name="whatsapp" eval="True"/></record>
+    <record id="notify_transfer_request" model="otm.iof.notify.event"><field name="code">transfer_request</field><field name="sequence">40</field><field name="email" eval="True"/><field name="whatsapp" eval="False"/></record>
+    <record id="notify_transferred_in" model="otm.iof.notify.event"><field name="code">transferred_in</field><field name="sequence">50</field><field name="email" eval="True"/><field name="whatsapp" eval="False"/></record>
+    <record id="notify_transfer_rejected" model="otm.iof.notify.event"><field name="code">transfer_rejected</field><field name="sequence">60</field><field name="email" eval="True"/><field name="whatsapp" eval="False"/></record>
+    <record id="notify_status" model="otm.iof.notify.event"><field name="code">status</field><field name="sequence">70</field><field name="email" eval="True"/><field name="whatsapp" eval="False"/></record>
+    <record id="notify_overdue" model="otm.iof.notify.event"><field name="code">overdue</field><field name="sequence">80</field><field name="email" eval="True"/><field name="whatsapp" eval="False"/></record>
+    <record id="cron_iof_whatsapp_send" model="ir.cron">
+        <field name="name">IOF Seva: send WhatsApp outbox</field>
+        <field name="model_id" ref="model_otm_iof_outbox"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_send()</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+    </record>
+    <record id="cron_iof_outbox_purge" model="ir.cron">
+        <field name="name">IOF Seva: purge sent WhatsApp outbox</field>
+        <field name="model_id" ref="model_otm_iof_outbox"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_purge()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+    </record>
+</odoo>

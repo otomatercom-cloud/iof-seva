@@ -7,6 +7,10 @@ class ResUsers(models.Model):
 
     iof_committee_id = fields.Many2one("otm.iof.committee", string="IOF Committee", index=True)
 
+    iof_notify_email = fields.Boolean("IOF e-mail alerts", default=True)
+    iof_notify_whatsapp = fields.Boolean("IOF WhatsApp alerts")
+    iof_whatsapp = fields.Char("WhatsApp number (with country code)")
+
     # ---- role helpers (use env.user semantics; never sudo-based) ----
     def _iof_is_national(self):
         self.ensure_one()

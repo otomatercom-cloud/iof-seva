@@ -121,3 +121,19 @@ class TestIofSeva(TransactionCase):
         c.invalidate_recordset()
         self.assertEqual(c.handling_committee_id, self.riy)
         self.assertEqual(c.reported_from_id, self.dam)
+
+    def test_notifications_email_and_whatsapp_without_victim_data(self):
+        self.env["otm.iof.notify.event"].search([("code", "=", "assigned")]).write({"email": True, "whatsapp": True})
+        self.hand.write({"email": "h@iof.test", "iof_whatsapp": "+966500000000", "iof_notify_whatsapp": True})
+        mails = self.env["mail.mail"].search_count([])
+        c = self._case(self.hand, victim_name="SecretVictimName")
+        c.with_user(self.head_ep)._do_assign(self.hand, "go")
+        self.assertGreater(self.env["mail.mail"].search_count([]), mails)
+        box = self.env["otm.iof.outbox"].search([("case_id", "=", c.id)])
+        self.assertTrue(box)
+        self.assertNotIn("SecretVictimName", box[0].text)
+        self.assertEqual(box[0].number, "+966500000000")
+        self.hand.iof_notify_whatsapp = False
+        before = self.env["otm.iof.outbox"].search_count([])
+        c.with_user(self.head_ep)._do_assign(self.hand, "again")
+        self.assertEqual(self.env["otm.iof.outbox"].search_count([]), before)

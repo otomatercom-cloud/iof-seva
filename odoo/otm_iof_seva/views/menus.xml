@@ -14,4 +14,6 @@
     <menuitem id="menu_iof_committees" name="Committees" parent="menu_iof_config" action="action_iof_committee" sequence="10" groups="group_iof_president"/>
     <menuitem id="menu_iof_issue_types" name="Issue Types" parent="menu_iof_config" action="action_iof_issue_type" sequence="20" groups="group_iof_president"/>
     <menuitem id="menu_iof_import" name="Import Excel Register" parent="menu_iof_config" action="action_iof_import" sequence="30" groups="group_iof_president"/>
+    <menuitem id="menu_iof_notify" name="Notifications" parent="menu_iof_config" action="action_iof_notify_event" sequence="40" groups="group_iof_president"/>
+    <menuitem id="menu_iof_outbox" name="WhatsApp Outbox" parent="menu_iof_config" action="action_iof_outbox" sequence="50" groups="group_iof_president"/>
 </odoo>

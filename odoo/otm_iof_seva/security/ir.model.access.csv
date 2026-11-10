@@ -16,3 +16,6 @@ access_status_wizard,otm.iof.status.wizard,model_otm_iof_status_wizard,group_iof
 access_import_wizard,otm.iof.import.wizard,model_otm_iof_import_wizard,group_iof_president,1,1,1,1
 access_site_content_user,otm.iof.site.content user,model_otm_iof_site_content,group_iof_handler,1,0,0,0
 access_site_content_president,otm.iof.site.content president,model_otm_iof_site_content,group_iof_president,1,1,1,1
+access_notify_event_user,otm.iof.notify.event user,model_otm_iof_notify_event,group_iof_handler,1,0,0,0
+access_notify_event_president,otm.iof.notify.event president,model_otm_iof_notify_event,group_iof_president,1,1,1,1
+access_outbox_president,otm.iof.outbox president,model_otm_iof_outbox,group_iof_president,1,0,0,1

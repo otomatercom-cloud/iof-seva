@@ -167,7 +167,9 @@ class OtmIofCase(models.Model):
             [{"case_id": rec.id, "event_type": event_type, "text": text, "is_internal": internal,
               "author_id": self.env.uid} for rec in self])
 
-    def _todo(self, users, summary):
+    def _todo(self, users, summary, event=None):
+        if event:
+            self._notify(event, users, summary)
         for rec in self.sudo():
             for user in users:
                 rec.activity_schedule("mail.mail_activity_data_todo", user_id=user.id, summary=summary)
@@ -216,6 +218,7 @@ class OtmIofCase(models.Model):
                     rec._log("resolved" if vals["status"] == "completed" else "status",
                              self.env._("Status: %(old)s → %(new)s", old=dict(STATUSES)[rec.old_status],
                                         new=dict(STATUSES)[vals["status"]]))
+                    rec._notify("status", rec.handled_by_id | rec.create_uid, self.env._("Status changed to %s", dict(STATUSES)[vals["status"]]))
                 else:
                     super(OtmIofCase, rec).write(vals)
             return True
@@ -275,11 +278,11 @@ class OtmIofCase(models.Model):
             rec._log("submitted", self.env._("Case registered as %s.", case_no))
             rec._check_duplicates()
             if state == "awaiting_assignment":
-                rec._todo(rec._notify_users(rec.handling_region), self.env._("Assign a coordinator: %s", case_no))
+                rec._todo(rec._notify_users(rec.handling_region), self.env._("Assign a coordinator: %s", case_no), "new_case")
             else:
-                rec._todo(rec.handled_by_id, self.env._("New case assigned to you: %s", case_no))
+                rec._todo(rec.handled_by_id, self.env._("New case assigned to you: %s", case_no), "assigned")
             if rec.priority == "critical":
-                rec._todo(rec._notify_users(rec.handling_region), self.env._("Critical case registered: %s", case_no))
+                rec._todo(rec._notify_users(rec.handling_region), self.env._("Critical case registered: %s", case_no), "critical")
                 rec.sudo().message_post(body=self.env._("Critical case registered."), subtype_xmlid="mail.mt_note",
                                         partner_ids=rec._notify_users(rec.handling_region).partner_id.ids)
         return True
@@ -314,7 +317,7 @@ class OtmIofCase(models.Model):
             "case_id": self.id, "by_id": self.env.uid, "to_id": user.id,
             "committee_id": self.handling_committee_id.id, "note": note})
         self._log("assigned", self.env._("Assigned to %s.", user.name) + (" " + note if note else ""))
-        self._todo(user, self.env._("New case assigned to you: %s", self.case_no))
+        self._todo(user, self.env._("New case assigned to you: %s", self.case_no), "assigned")
 
     def _apply_transfer(self, to_committee, note):
         self.ensure_one()
@@ -322,7 +325,7 @@ class OtmIofCase(models.Model):
         self.sudo().write({"handling_committee_id": to_committee.id, "handled_by_id": False,
                            "assignment_state": "awaiting_assignment", "escalated_on": False})
         self._log("transferred", self.env._("Transferred %(a)s → %(b)s. %(n)s", a=old.code, b=to_committee.code, n=note or ""))
-        self._todo(self._notify_users(to_committee.region), self.env._("Assign a coordinator (transferred): %s", self.case_no))
+        self._todo(self._notify_users(to_committee.region), self.env._("Assign a coordinator (transferred): %s", self.case_no), "transferred_in")
 
     def action_open_assign(self):
         self.ensure_one()
@@ -356,6 +359,6 @@ class OtmIofCase(models.Model):
                                     ("submitted_date", "<=", limit), ("escalated_on", "=", False)])
         for case in cases:
             case._todo(case._notify_users(case.handling_region),
-                       self.env._("OVERDUE assignment (%(d)s days): %(c)s", d=days, c=case.case_no))
+                       self.env._("OVERDUE assignment (%(d)s days): %(c)s", d=days, c=case.case_no), "overdue")
             case._log("escalation", self.env._("Not assigned within %s days – escalated.", days), internal=True)
             case.write({"escalated_on": fields.Datetime.now()})

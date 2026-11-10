@@ -44,3 +44,10 @@ Deletion/anonymisation should be run by a President-approved scheduled action; c
 ## 6. Monitoring
 - Odoo log: errors "public report failed", cron "escalate unassigned cases" (daily).
 - Uptime check on `/login` (web) and `/iof/site` (through web: `/api/site`).
+
+## Notifications (Phase 7)
+- Events (new case, assigned, critical, transfer request / transferred in / decided, status change, overdue) are configured by the President in portal **Settings → Alert events** (or Odoo: IOF Seva → Configuration → Notifications). Each user sets their own e-mail / WhatsApp in **Settings → My alerts**.
+- Messages contain only case no., issue type and committee + a link. Never victim or passport data.
+- **E-mail**: configure an outgoing mail server in Odoo; mails go through the standard mail queue.
+- **WhatsApp**: Odoo POSTs `{"to","text","event","caseId"}` (Bearer token) to a gateway/middleware URL. Set system parameters `otm_iof_seva.whatsapp_url`, `otm_iof_seva.whatsapp_token`. Queue = IOF Seva → Configuration → WhatsApp Outbox (3 retries, sent rows purged after 30 days). Meta Cloud API needs approved templates: let the middleware map the text to a template.
+- `otm_iof_seva.portal_url` (e.g. https://seva.example.org) adds a case link to messages.

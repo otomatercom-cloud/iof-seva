@@ -13,7 +13,7 @@ export function UserFormModal({ open, onOpenChange, initial, roles, lockRegion }
   const upsert = useStore((s) => s.upsertUser);
   const users = useStore((s) => s.users);
   const { toast } = useToast();
-  const [f, setF] = useState({ name: initial?.name ?? "", email: initial?.email ?? "", phone: initial?.phone ?? "", role: (initial?.role ?? roles[0]) as Role, provinceCode: initial?.provinceCode ?? "" });
+  const [f, setF] = useState({ name: initial?.name ?? "", email: initial?.email ?? "", phone: initial?.phone ?? "", role: (initial?.role ?? roles[0]) as Role, provinceCode: initial?.provinceCode ?? "", notifyEmail: initial?.notifyEmail ?? true, notifyWhatsapp: initial?.notifyWhatsapp ?? false, whatsapp: initial?.whatsapp ?? "" });
   const [err, setErr] = useState<Record<string, string>>({});
   const save = () => {
     const e: Record<string, string> = {};
@@ -33,6 +33,7 @@ export function UserFormModal({ open, onOpenChange, initial, roles, lockRegion }
         <Field label="Phone"><Input value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} /></Field>
         <div className="grid grid-cols-2 gap-3"><Field label="Role"><Select value={f.role} onChange={(e) => setF({ ...f, role: e.target.value as Role })}>{roles.map((r) => <option key={r} value={r}>{ROLE_LABEL[r]}</option>)}</Select></Field>
           <Field label="Province" required error={err.provinceCode}><ProvinceSelector value={f.provinceCode} onChange={(v) => setF({ ...f, provinceCode: v })} invalid={!!err.provinceCode} /></Field></div>
+        <Field label="WhatsApp number (alerts)"><Input value={f.whatsapp} placeholder="+9665XXXXXXXX" onChange={(e) => setF({ ...f, whatsapp: e.target.value, notifyWhatsapp: !!e.target.value.trim() })} /></Field>
       </div>
     </Modal>
   );

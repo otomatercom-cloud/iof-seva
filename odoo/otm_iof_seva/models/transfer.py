@@ -51,7 +51,7 @@ class OtmIofTransfer(models.Model):
         else:
             case.sudo().write({"assignment_state": "transfer_pending"})
             case._log("transferred", self.env._("Transfer to %s requested. %s", to_committee.code, reason))
-            case._todo(case._notify_users(to_committee.region), self.env._("Transfer request: %s", case.case_no))
+            case._todo(case._notify_users(to_committee.region), self.env._("Transfer request: %s", case.case_no), "transfer_request")
         return rec
 
     def _check_can_decide(self):
@@ -67,6 +67,7 @@ class OtmIofTransfer(models.Model):
             rec._check_can_decide()
             rec.sudo().write({"state": "accepted", "decided_by_id": self.env.uid, "decided_date": fields.Datetime.now()})
             rec.case_id.sudo()._apply_transfer(rec.to_committee_id, self.env._("Accepted: %s", rec.reason))
+            rec.case_id.sudo()._notify("transfer_rejected", rec.requested_by_id, self.env._("Transfer accepted"))
 
     def action_reject(self, note=False):
         for rec in self:
@@ -76,3 +77,4 @@ class OtmIofTransfer(models.Model):
             case = rec.case_id.sudo()
             case.write({"assignment_state": "assigned" if case.handled_by_id else "awaiting_assignment"})
             case._log("transferred", self.env._("Transfer to %s rejected.", rec.to_committee_id.code))
+            case._notify("transfer_rejected", rec.requested_by_id, self.env._("Transfer rejected"))
