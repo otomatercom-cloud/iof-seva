@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_iof_ticket_user,iof.support.ticket user,model_iof_support_ticket,group_iof_support_user,1,1,1,0
+access_iof_ticket_manager,iof.support.ticket manager,model_iof_support_ticket,group_iof_support_manager,1,1,1,1
+access_iof_ticket_msg_user,iof.support.message user,model_iof_support_message,group_iof_support_user,1,1,1,0
+access_iof_ticket_msg_manager,iof.support.message manager,model_iof_support_message,group_iof_support_manager,1,1,1,1

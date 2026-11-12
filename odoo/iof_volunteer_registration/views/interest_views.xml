@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_iof_interest_list" model="ir.ui.view">
+        <field name="name">iof.volunteer.interest.list</field>
+        <field name="model">iof.volunteer.interest</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_iof_interest" model="ir.actions.act_window">
+        <field name="name">Volunteer Interests</field>
+        <field name="res_model">iof.volunteer.interest</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

@@ -51,3 +51,6 @@ Deletion/anonymisation should be run by a President-approved scheduled action; c
 - **E-mail**: configure an outgoing mail server in Odoo; mails go through the standard mail queue.
 - **WhatsApp**: Odoo POSTs `{"to","text","event","caseId"}` (Bearer token) to a gateway/middleware URL. Set system parameters `otm_iof_seva.whatsapp_url`, `otm_iof_seva.whatsapp_token`. Queue = IOF Seva → Configuration → WhatsApp Outbox (3 retries, sent rows purged after 30 days). Meta Cloud API needs approved templates: let the middleware map the text to a template.
 - `otm_iof_seva.portal_url` (e.g. https://seva.example.org) adds a case link to messages.
+
+## Merged public site (Phase 8)
+The public website (volunteer registration, support tickets, CMS, visual editor) comes from the separate "iof-seva1" build; see `docs/DEPLOYMENT_SITE.md` and `docs/VOLUNTEER_API.md`. The old simple Website CMS and `/report` form of the portal were removed; `/support` replaces `/report`. Required system parameter: none new; `otm_iof_seva.public_key` is no longer used.

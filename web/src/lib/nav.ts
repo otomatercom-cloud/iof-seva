@@ -31,8 +31,8 @@ export const NAV: NavGroup[] = [
   { label: "Province Management", href: "/provinces", icon: MapPinned, show: canSeeProvinces },
   { label: "Coordinator Management", href: "/coordinators", icon: Users2, show: canSeeCoordinators },
   { label: "Issue Type Management", href: "/issue-types", icon: Tags, show: canManageIssueTypes },
-  { label: "Reports & Analytics", href: "/reports", icon: BarChart3, show: canSeeReports },
-  { label: "Website Content", href: "/website", icon: Globe, show: canManageWebsite },
+  { label: "Reports & Analytics", href: "/analytics", icon: BarChart3, show: canSeeReports },
+  { label: "Website Editor", href: "/editor/login", icon: Globe, show: canManageWebsite },
   { label: "User Management", href: "/users", icon: ShieldCheck, show: canManageUsers },
   { label: "Settings", href: "/settings", icon: Settings },
 ];
@@ -41,7 +41,7 @@ export const CRUMBS: Record<string, string> = {
   dashboard: "Dashboard", cases: "Case Management", new: "Register New Case", mine: "My Assigned Cases", pending: "Pending Cases",
   resolved: "Resolved Cases", assignment: "Case Assignment", queue: "Assignment Queue", provinces: "Province-wise Assignment",
   transfers: "Transfer Requests", coordinators: "Coordinator Management", "issue-types": "Issue Type Management",
-  reports: "Reports & Analytics", users: "User Management", settings: "Settings", website: "Website Content", notifications: "Notifications",
+  analytics: "Reports & Analytics", users: "User Management", settings: "Settings", website: "Website Content", notifications: "Notifications",
 };
 export const SPECIAL_CRUMB_HREF: Record<string, string> = { cases: "/cases", assignment: "/assignment/queue" };
 export const roleAccent: Record<Role, string> = { president: "Super Admin", secretary: "Secretary", province_head: "Province Head", coordinator: "Coordinator", handler: "Case Handler" };

@@ -108,7 +108,7 @@ export function RecentActivities({ feed }: { feed: Feed }) {
 export function ProvincePerformance({ rows }: { rows: PerfRow[] }) {
   return (
     <Card>
-      <CardHeader title="Province performance" description="Cases handled by each province committee" action={<ViewAll href="/reports" label="Full report" />} />
+      <CardHeader title="Province performance" description="Cases handled by each province committee" action={<ViewAll href="/analytics" label="Full report" />} />
       <div className="overflow-x-auto px-2 pb-3 pt-2">
         <table className="w-full text-left text-[13px]">
           <thead><tr className="text-xs text-muted"><th className="px-3 py-2 font-medium">Province</th><th className="px-3 py-2 text-right font-medium">Total</th><th className="px-3 py-2 text-right font-medium">Open</th><th className="px-3 py-2 text-right font-medium">Critical</th><th className="px-3 py-2 text-right font-medium">Avg days</th><th className="w-40 px-3 py-2 font-medium">Resolution rate</th></tr></thead>

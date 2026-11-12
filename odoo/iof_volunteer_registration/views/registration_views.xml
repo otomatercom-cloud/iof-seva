@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_iof_registration_list" model="ir.ui.view">
+        <field name="name">iof.volunteer.registration.list</field>
+        <field name="model">iof.volunteer.registration</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="registration_date"/>
+                <field name="full_name"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="saudi_city"/>
+                <field name="interest_ids" widget="many2many_tags"/>
+                <field name="source" optional="hide"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'new'" decoration-warning="state == 'under_review'"
+                       decoration-primary="state == 'contacted'" decoration-success="state == 'approved'"
+                       decoration-danger="state == 'rejected'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_iof_registration_form" model="ir.ui.view">
+        <field name="name">iof.volunteer.registration.form</field>
+        <field name="model">iof.volunteer.registration</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_review" string="Start Review" type="object" class="btn-primary"
+                            invisible="state != 'new'"/>
+                    <button name="action_contact" string="Mark Contacted" type="object"
+                            invisible="state not in ('new', 'under_review')"/>
+                    <button name="action_approve" string="Approve" type="object" class="btn-success"
+                            groups="iof_volunteer_registration.group_iof_volunteer_manager"
+                            invisible="state not in ('under_review', 'contacted')"/>
+                    <button name="action_reject" string="Reject" type="object"
+                            groups="iof_volunteer_registration.group_iof_volunteer_manager"
+                            invisible="state in ('approved', 'rejected')"/>
+                    <button name="action_reset" string="Reset to New" type="object"
+                            groups="iof_volunteer_registration.group_iof_volunteer_manager"
+                            invisible="state == 'new'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="new,under_review,contacted,approved"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-warning" role="alert" invisible="duplicate_count == 0">
+                        Another registration shares this email or mobile number.
+                        This may be a legitimate family or shared contact; review before acting.
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group name="group_personal" string="Personal">
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="gender"/>
+                            <field name="date_of_birth"/>
+                            <field name="nationality"/>
+                            <field name="iqama_number"/>
+                            <field name="saudi_city"/>
+                        </group>
+                        <group name="group_contact" string="Contact">
+                            <field name="mobile" widget="phone"/>
+                            <field name="whatsapp" widget="phone"/>
+                            <field name="email" widget="email"/>
+                            <field name="address"/>
+                            <field name="city"/>
+                            <field name="region"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Volunteering" name="page_volunteering">
+                            <group>
+                                <group name="group_interests">
+                                    <field name="interest_ids" widget="many2many_tags"/>
+                                    <field name="other_interest"/>
+                                    <field name="languages"/>
+                                    <field name="hours_per_month"/>
+                                </group>
+                                <group name="group_availability" string="Availability">
+                                    <field name="avail_weekdays"/>
+                                    <field name="avail_weekends"/>
+                                    <field name="avail_emergency"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="special_skills"/>
+                                <field name="experience"/>
+                            </group>
+                        </page>
+                        <page string="Professional" name="page_professional">
+                            <group>
+                                <field name="occupation"/>
+                                <field name="organization"/>
+                                <field name="qualification"/>
+                            </group>
+                        </page>
+                        <page string="Emergency Contact" name="page_emergency">
+                            <group>
+                                <field name="emergency_name"/>
+                                <field name="emergency_relationship"/>
+                                <field name="emergency_phone" widget="phone"/>
+                            </group>
+                        </page>
+                        <page string="Registration Info" name="page_info">
+                            <group>
+                                <group name="group_reginfo">
+                                    <field name="registration_date"/>
+                                    <field name="source"/>
+                                    <field name="consent_given"/>
+                                    <field name="consent_date"/>
+                                </group>
+                                <group name="group_dup">
+                                    <field name="duplicate_count"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Internal Notes" name="page_notes">
+                            <field name="internal_notes" placeholder="Staff-only notes..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_iof_registration_search" model="ir.ui.view">
+        <field name="name">iof.volunteer.registration.search</field>
+        <field name="model">iof.volunteer.registration</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Reference / Name / Contact"
+                       filter_domain="['|', '|', '|', '|', ('name', 'ilike', self), ('full_name', 'ilike', self), ('email', 'ilike', self), ('mobile', 'ilike', self), ('whatsapp', 'ilike', self)]"/>
+                <field name="interest_ids"/>
+                <field name="saudi_city"/>
+                <filter string="New" name="filter_new" domain="[('state', '=', 'new')]"/>
+                <filter string="Under Review" name="filter_review" domain="[('state', '=', 'under_review')]"/>
+                <filter string="Contacted" name="filter_contacted" domain="[('state', '=', 'contacted')]"/>
+                <filter string="Approved" name="filter_approved" domain="[('state', '=', 'approved')]"/>
+                <filter string="Rejected" name="filter_rejected" domain="[('state', '=', 'rejected')]"/>
+                <separator/>
+                <filter string="Registered This Month" name="filter_month"
+                        domain="[('registration_date', '&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+                <filter string="From Website" name="filter_website" domain="[('source', '=', 'website')]"/>
+                <separator/>
+                <group>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="City" name="group_city" context="{'group_by': 'saudi_city'}"/>
+                    <filter string="Registration Month" name="group_month" context="{'group_by': 'registration_date:month'}"/>
+                    <filter string="Source" name="group_source" context="{'group_by': 'source'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_iof_registration" model="ir.actions.act_window">
+        <field name="name">Volunteer Registrations</field>
+        <field name="res_model">iof.volunteer.registration</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_iof_registration_search"/>
+        <field name="context">{'search_default_filter_new': 1}</field>
+    </record>
+</odoo>

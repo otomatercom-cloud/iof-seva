@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="issue_type_support_other" model="otm.iof.issue.type">
+        <field name="name">Website help request</field>
+        <field name="category">General</field>
+        <field name="description">Visa, iqama, passport, education, travel and other requests received through the website.</field>
+        <field name="default_priority">medium</field>
+    </record>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_iof_root" name="IOF Volunteers" sequence="40"
+              groups="iof_volunteer_registration.group_iof_volunteer_user"/>
+    <menuitem id="menu_iof_registrations" name="Registrations" parent="menu_iof_root"
+              action="action_iof_registration" sequence="10"/>
+    <menuitem id="menu_iof_config" name="Configuration" parent="menu_iof_root" sequence="90"
+              groups="iof_volunteer_registration.group_iof_volunteer_manager"/>
+    <menuitem id="menu_iof_interests" name="Volunteer Interests" parent="menu_iof_config"
+              action="action_iof_interest" sequence="10"/>
+</odoo>
