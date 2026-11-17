@@ -1,4 +1,8 @@
 "use client";
+import { useState } from "react";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ProvinceFormModal } from "@/components/common/province-form-modal";
 import { Badge, Card, PageHeader } from "@/components/ui/card";
 import { Switch } from "@/components/ui/form";
 import { RoleGuard } from "@/components/common/role-guard";
@@ -16,10 +20,12 @@ function Page() {
   const toggle = useStore((s) => s.toggleProvince);
   const setPrefix = useStore((s) => s.setProvincePrefix);
   const { toast } = useToast();
+  const [adding, setAdding] = useState(false);
   const rows = provinces.filter((p) => isNational(me) || p.region === regionOf(me.provinceCode));
   return (
     <div>
-      <PageHeader title="Province Management" description="IOF committees from the register's “Responsible IOF” list. Regions group chapters under a Province Head." />
+      <PageHeader title="Province Management" description="IOF committees from the register's “Responsible IOF” list. Regions group chapters under a Province Head." actions={isNational(me) ? <Button onClick={() => setAdding(true)}><Plus className="size-4" /> Add province</Button> : undefined} />
+      <ProvinceFormModal open={adding} onOpenChange={setAdding} />
       <Card className="overflow-x-auto"><table className="w-full min-w-[920px] text-left text-[13px]"><thead className="bg-brand-50/60 text-xs text-muted"><tr><th className="px-4 py-2.5 font-medium">Committee code</th><th className="px-4 py-2.5 font-medium">Name</th><th className="px-4 py-2.5 font-medium">Case no. prefix</th><th className="px-4 py-2.5 font-medium">Region</th><th className="px-4 py-2.5 font-medium">Lead</th><th className="px-4 py-2.5 text-right font-medium">Staff</th><th className="px-4 py-2.5 text-right font-medium">Open cases</th><th className="px-4 py-2.5 text-right font-medium">Waiting</th><th className="px-4 py-2.5 font-medium">Active</th></tr></thead>
         <tbody>{rows.map((p) => {
           const head = users.find((u) => u.provinceCode === p.code && (u.role === "province_head" || u.role === "president")) ?? users.find((u) => u.role === "province_head" && u.provinceCode === `IOF-${p.region}`);

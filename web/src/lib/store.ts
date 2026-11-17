@@ -2,7 +2,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type {
-  Case, CaseDocument, FinanceEntry, IssueType, Notification, Priority, Province, StatusId, TimelineEvent, TimelineType, Transfer, User,
+  Case, CaseDocument, FinanceEntry, IssueType, Notification, Priority, Province, RegionCode, StatusId, TimelineEvent, TimelineType, Transfer, User,
 } from "./types";
 import { SEED_CASES, SEED_NOTIFICATIONS, SEED_TRANSFERS, USERS } from "./mock-data";
 import { PROVINCES, SEED_ISSUE_TYPES, casePrefixOf, regionOf, statusById, provinceName } from "./reference-data";
@@ -54,6 +54,7 @@ interface State {
   toggleUser: (id: string) => void;
   upsertUser: (u: Omit<User, "id"> & { id?: string }) => void;
   toggleProvince: (code: string) => void;
+  addProvince: (name: string, region: RegionCode, prefix?: string) => void;
   setProvincePrefix: (code: string, prefix: string) => void;
   markRead: (id?: string) => void;
   resetDemo: () => void;
@@ -99,6 +100,7 @@ function odooActions(set: Setter, get: () => State, fail: (e: unknown) => never)
     toggleUser: (id) => void run(() => odoo("toggle_user", id)),
     upsertUser: (u) => void run(() => odoo("upsert_user", u)),
     toggleProvince: (code) => void run(() => odoo("toggle_committee", code)),
+    addProvince: (name, region, prefix) => void run(() => odoo("add_committee", name, region, prefix ?? false)),
     setProvincePrefix: (code, prefix) => void run(() => odoo("set_prefix", code, prefix)),
     markRead: (id) => void run(() => odoo("mark_read", id ?? false)),
     resetDemo: () => {},
@@ -247,6 +249,13 @@ export const useStore = create<State>()(
         toggleUser: (id) => set((s) => ({ users: s.users.map((x) => (x.id === id ? { ...x, active: !x.active } : x)) })),
         upsertUser: (u) => set((s) => ({ users: u.id ? s.users.map((x) => (x.id === u.id ? ({ ...x, ...u } as User) : x)) : [...s.users, { ...u, id: uid("u") } as User] })),
         setProvincePrefix: (code, prefix) => set((s) => ({ provinces: s.provinces.map((p) => (p.code === code ? { ...p, prefix: prefix.trim().toUpperCase() } : p)) })),
+        addProvince: (name, region, prefix) => set((s) => {
+          const parent = s.provinces.find((p) => p.region === region && p.kind === "region");
+          const slug = name.trim().replace(/[^A-Za-z0-9]/g, "");
+          const code = `IOF-${region}-${slug}`;
+          if (!slug || s.provinces.some((p) => p.code === code)) return {};
+          return { provinces: [...s.provinces, { code, name: `${parent?.name ?? region} · ${name.trim()}`, region, kind: "chapter", active: true, prefix: (prefix || parent?.prefix || code.slice(0, 6)).toUpperCase() }] };
+        }),
         toggleProvince: (code) => set((s) => ({ provinces: s.provinces.map((p) => (p.code === code ? { ...p, active: !p.active } : p)) })),
         markRead: (id) => set((s) => ({ notifications: s.notifications.map((n) => (!id || n.id === id ? { ...n, read: true } : n)) })),
         resetDemo: () => set({ ...seed() }),

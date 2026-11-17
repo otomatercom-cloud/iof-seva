@@ -465,6 +465,29 @@ class OtmIofApi(models.AbstractModel):
         return True
 
     @api.model
+    def add_committee(self, name, region, prefix=None):
+        """Add a chapter (e.g. Madinah) under an existing region. Code is generated: IOF-<REGION>-<Name>."""
+        if not self.env.user.has_group(G + "group_iof_secretary"):
+            raise AccessError(self.env._("Only the Secretary or President can add a province."))
+        name = re.sub(r"\s+", " ", (name or "")).strip()
+        if len(name) < 2 or len(name) > 60:
+            raise UserError(self.env._("Enter a name of 2 to 60 characters."))
+        Committee = self.env["otm.iof.committee"].sudo().with_context(active_test=False)
+        parent = Committee.search([("kind", "=", "region"), ("region", "=", region)], limit=1)
+        if not parent:
+            raise UserError(self.env._("Choose an existing region (Central, Eastern or Western)."))
+        slug = re.sub(r"[^A-Za-z0-9]", "", name.title())[:20]
+        if not slug:
+            raise UserError(self.env._("The name must contain letters or digits."))
+        code = "IOF-%s-%s" % (region, slug)
+        if Committee.search_count([("code", "=", code)]) or Committee.search_count([("name", "=ilike", "%s · %s" % (parent.name, name))]):
+            raise UserError(self.env._("This province / chapter already exists."))
+        prefix = re.sub(r"[^A-Za-z0-9-]", "", (prefix or "").upper())[:12] or parent._get_prefix()
+        Committee.create({"name": "%s · %s" % (parent.name, name), "code": code, "region": region, "kind": "chapter",
+                          "parent_id": parent.id, "case_prefix": prefix})
+        return code
+
+    @api.model
     def set_prefix(self, code, prefix):
         if not self.env.user.has_group(G + "group_iof_secretary"):
             raise AccessError(self.env._("Only the Secretary or President can set the case-number prefix."))

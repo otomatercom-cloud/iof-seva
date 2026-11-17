@@ -143,3 +143,17 @@ class TestIofSeva(TransactionCase):
         admin.group_ids = [(4, self.env.ref("otm_iof_seva.group_iof_president").id)]
         data = self.env["otm.iof.api"].with_user(admin).bootstrap()
         self.assertIn(str(admin.id), [u["id"] for u in data["users"]])
+
+    def test_add_province(self):
+        api = self.env["otm.iof.api"]
+        code = api.with_user(self.pres).add_committee("Madinah", "WP", "iof-wp")
+        self.assertEqual(code, "IOF-WP-Madinah")
+        c = self.env["otm.iof.committee"].search([("code", "=", code)])
+        self.assertEqual((c.kind, c.region, c.case_prefix), ("chapter", "WP", "IOF-WP"))
+        self.assertEqual(c.parent_id.code, "IOF-WP")
+        with self.assertRaises(UserError):
+            api.with_user(self.pres).add_committee("Madinah", "WP")  # duplicate
+        with self.assertRaises(UserError):
+            api.with_user(self.pres).add_committee("X Land", "NC")  # no new national/unknown region
+        with self.assertRaises(UserError):
+            api.with_user(self.coord).add_committee("Tabuk", "WP")  # coordinator cannot (AccessError is a UserError)
