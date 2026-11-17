@@ -80,6 +80,8 @@ export const TEXTS: Record<string, TextDef> = {
   "home.hero.title_main": ["Home", "Hero headline (white part)", "Together, We Make a"],
   "home.hero.title_accent": ["Home", "Hero headline (orange word)", "Difference."],
   "home.hero.intro": ["Home", "Hero paragraph", "Connecting, supporting and empowering the Indian community across Saudi Arabia, every day, through service, culture and volunteering.", "text"],
+  "home.hero.image": ["Home", "Hero photo (replaces the illustration)", "", "image"],
+  "home.hero.image_alt": ["Home", "Hero photo description", "IOF volunteers serving the community"],
   "home.hero.cta1": ["Home", "Hero button 1", "Join as Volunteer"],
   "home.hero.cta2": ["Home", "Hero button 2", "Explore Seva Activities"],
   "home.intro.image": ["Home", "About section photo", "", "image"],

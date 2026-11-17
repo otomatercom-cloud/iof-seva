@@ -39,6 +39,7 @@ function FloatCard({ className, icon, tone, title, text }: {
 export async function Hero({ editing = false }: { editing?: boolean } = {}) {
   const c = await getContent(editing);
   const cards = c.items("hero_cards");
+  const heroPhoto = c.img("home.hero.image");
   const floats = ["anim-float left-0 top-[7%]", "anim-float-2 right-0 top-[42%]", "anim-float-3 bottom-[2%] left-[6%]"];
   const tones = ["bg-saffron-50 text-saffron-700", "bg-seva-50 text-seva-700", "bg-navy-50 text-navy-900"];
   return (
@@ -75,13 +76,14 @@ export async function Hero({ editing = false }: { editing?: boolean } = {}) {
             <circle cx="260" cy="260" r="240" fill="none" stroke="#2a5088" strokeWidth="1.5" strokeDasharray="4 10" />
             <circle cx="260" cy="20" r="9" fill="#ff9a5c" /><circle cx="500" cy="260" r="6" fill="#4ade80" />
           </svg>
-          <div className="absolute left-[12%] top-[11%] h-[78%] w-[76%] overflow-hidden rounded-[36px] bg-navy-700 shadow-[0_40px_80px_-30px_rgba(0,0,0,.6)]">
-            <svg aria-hidden viewBox="0 0 400 420" className="size-full">
+          <div className="absolute left-[12%] top-[11%] h-[78%] w-[76%] overflow-hidden rounded-[36px] bg-navy-700 shadow-[0_40px_80px_-30px_rgba(0,0,0,.6)]" {...(c.editing ? { "data-ei": "home.hero.image" } : {})}>
+            {heroPhoto && <Image src={heroPhoto} alt={c.t("home.hero.image_alt")} fill priority sizes="(min-width:1024px) 40vw, 90vw" className="object-cover" />}
+            {!heroPhoto && <svg aria-hidden viewBox="0 0 400 420" className="size-full">
               <path className="anim-draw" d="M-10 330 C80 260 140 360 220 280 S340 200 420 250" fill="none" stroke="#ff9a5c" strokeWidth="3" strokeLinecap="round" />
               <path className="anim-draw" d="M-10 370 C90 310 150 400 230 330 S350 260 420 300" fill="none" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" opacity=".8" />
               <circle cx="200" cy="130" r="64" fill="#0b2545" /><circle cx="200" cy="130" r="64" fill="none" stroke="#2a5088" strokeWidth="2" />
               <path d="M200 100 c-14 -20 -42 -8 -36 14 c4 16 24 28 36 40 c12 -12 32 -24 36 -40 c6 -22 -22 -34 -36 -14z" fill="#d24e0a" />
-            </svg>
+            </svg>}
           </div>
           {cards.slice(0, 3).map((k, i) => (
             <FloatCard key={k.title} className={floats[i]} tone={tones[i]} icon={<Icon name={k.icon} className="size-[22px]" />}
