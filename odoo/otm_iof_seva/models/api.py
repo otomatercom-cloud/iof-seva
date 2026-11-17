@@ -176,6 +176,7 @@ class OtmIofApi(models.AbstractModel):
         staff = user.has_group(G + "group_iof_coordinator")
         transfers = self.env["otm.iof.transfer"].search([], order="id desc", limit=300)
         users = self.env["res.users"].sudo().with_context(active_test=False).search([("iof_committee_id", "!=", False)])
+        users |= user.sudo()  # the signed-in user always appears, even without a committee (e.g. the admin as President)
         acts = self.env["mail.activity"].search([("res_model", "=", "otm.iof.case"), ("user_id", "=", user.id)], order="id desc", limit=100)
         notes = []
         for a in acts:

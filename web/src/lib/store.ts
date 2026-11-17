@@ -132,7 +132,8 @@ export const useStore = create<State>()(
           try {
             const b = await odoo<{ me: User } & Pick<State, "users" | "provinces" | "issueTypes" | "cases" | "transfers" | "notifications">>("bootstrap");
             const { me, ...data } = b;
-            set({ ...data, cases: get().cases, currentUserId: me.id, loadError: "", version: get().version + 1 });
+            const users = data.users.some((u) => u.id === me.id) ? data.users : [...data.users, me]; // never lock out a user missing from the list
+            set({ ...data, users, cases: get().cases, currentUserId: me.id, loadError: "", version: get().version + 1 });
             const open = get().openCaseId;
             if (open) { try { get().cacheCase(await odoo<Case>("get_case", open)); } catch {} }
             return true;

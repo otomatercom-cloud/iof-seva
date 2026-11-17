@@ -137,3 +137,9 @@ class TestIofSeva(TransactionCase):
         before = self.env["otm.iof.outbox"].search_count([])
         c.with_user(self.head_ep)._do_assign(self.hand, "again")
         self.assertEqual(self.env["otm.iof.outbox"].search_count([]), before)
+
+    def test_bootstrap_includes_signed_in_user_without_committee(self):
+        admin = self.env.ref("base.user_admin")
+        admin.group_ids = [(4, self.env.ref("otm_iof_seva.group_iof_president").id)]
+        data = self.env["otm.iof.api"].with_user(admin).bootstrap()
+        self.assertIn(str(admin.id), [u["id"] for u in data["users"]])
