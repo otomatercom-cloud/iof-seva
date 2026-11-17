@@ -9,4 +9,5 @@ from . import case_document
 from . import transfer
 from . import site_content
 from . import notify
+from . import report
 from . import api

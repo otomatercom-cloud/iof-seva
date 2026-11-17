@@ -138,6 +138,31 @@ class TestIofSeva(TransactionCase):
         c.with_user(self.head_ep)._do_assign(self.hand, "again")
         self.assertEqual(self.env["otm.iof.outbox"].search_count([]), before)
 
+    def test_weekly_report_is_scoped_and_has_no_victim_data(self):
+        import io
+        import zipfile
+        self.sec.email, self.head_cp.email = "sec@iof.test", "hcp@iof.test"
+        self._case(self.hand, victim_name="SecretVictimName")
+        Mail = self.env["mail.mail"]
+        before = Mail.search([]).ids
+        self.env["otm.iof.case"]._cron_weekly_report()
+        new = Mail.search([("id", "not in", before), ("subject", "=", "[IOF Seva] Weekly case report")])
+        to = set(new.mapped("email_to"))
+        self.assertIn("sec@iof.test", to)
+        sec_mail = new.filtered(lambda m: m.email_to == "sec@iof.test")
+        self.assertEqual(len(sec_mail.attachment_ids), 1)
+        import base64
+        def blob_of(mail):
+            z = zipfile.ZipFile(io.BytesIO(base64.b64decode(mail.attachment_ids.datas)))
+            return b"".join(z.read(n) for n in z.namelist())
+        blob = blob_of(sec_mail)
+        self.assertIn(b"By province", blob)
+        self.assertIn(b"IOF-EP-Dammam", blob)
+        self.assertNotIn(b"SecretVictimName", blob)
+        # the Central-region head must not see Eastern-province cases in their workbook
+        for m in new.filtered(lambda m: m.email_to == "hcp@iof.test"):
+            self.assertNotIn(b"IOF-EP-Dammam", blob_of(m))
+
     def test_bootstrap_includes_signed_in_user_without_committee(self):
         admin = self.env.ref("base.user_admin")
         admin.group_ids = [(4, self.env.ref("otm_iof_seva.group_iof_president").id)]

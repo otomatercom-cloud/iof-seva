@@ -62,3 +62,9 @@ The public website (volunteer registration, support tickets, CMS, visual editor)
 ## Deploying an update
 `sudo /opt/iof-seva/scripts/deploy-server.sh [-i new_modules] [-m updated_modules]`
 When Odoo modules change the script stops the `elysians` service, updates the modules, starts it again, then builds and restarts the web app.
+
+## Weekly report
+Every week Secretary/President and Province Heads (with e-mail alerts on) receive an Excel file: cases by province and status, plus the list of open cases (no victim details). Each person only gets cases they may see.
+- Turn off: Settings → Technical → System Parameters → `otm_iof_seva.weekly_report` = `0`
+- Change day/time: Settings → Technical → Scheduled Actions → "IOF Seva: weekly case report"
+- Send a test now: open the scheduled action and click **Run Manually**. Needs an outgoing mail server.
