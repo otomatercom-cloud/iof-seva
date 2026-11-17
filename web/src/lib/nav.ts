@@ -1,9 +1,10 @@
 import {
   LayoutDashboard, FolderKanban, UserCheck, MapPinned, Users2, Tags, BarChart3, ShieldCheck, Settings,
-  FilePlus2, Globe, ListChecks, Clock3, CheckCircle2, Inbox, Layers, ArrowLeftRight, type LucideIcon,
+  FilePlus2, Globe, HeartHandshake, ListChecks, Clock3, CheckCircle2, Inbox, Layers, ArrowLeftRight, type LucideIcon,
 } from "lucide-react";
 import type { Role, User } from "./types";
-import { canManageIssueTypes, canManageUsers, canManageWebsite, canRegister, canSeeAssignment, canSeeCoordinators, canSeeProvinces, canSeeReports } from "./permissions";
+import { USE_ODOO } from "./config";
+import { canManageIssueTypes, canManageUsers, canManageVolunteers, canManageWebsite, canRegister, canSeeAssignment, canSeeCoordinators, canSeeProvinces, canSeeReports } from "./permissions";
 
 export interface NavItem { label: string; href: string; icon: LucideIcon; show?: (u: User) => boolean; badge?: "queue" | "transfers" }
 export interface NavGroup { label: string; href?: string; icon: LucideIcon; children?: NavItem[]; show?: (u: User) => boolean }
@@ -29,6 +30,7 @@ export const NAV: NavGroup[] = [
     ],
   },
   { label: "Province Management", href: "/provinces", icon: MapPinned, show: canSeeProvinces },
+  { label: "Volunteers", href: "/volunteers", icon: HeartHandshake, show: (u) => USE_ODOO && canManageVolunteers(u) },
   { label: "Coordinator Management", href: "/coordinators", icon: Users2, show: canSeeCoordinators },
   { label: "Issue Type Management", href: "/issue-types", icon: Tags, show: canManageIssueTypes },
   { label: "Reports & Analytics", href: "/analytics", icon: BarChart3, show: canSeeReports },
@@ -40,7 +42,7 @@ export const NAV: NavGroup[] = [
 export const CRUMBS: Record<string, string> = {
   dashboard: "Dashboard", cases: "Case Management", new: "Register New Case", mine: "My Assigned Cases", pending: "Pending Cases",
   resolved: "Resolved Cases", assignment: "Case Assignment", queue: "Assignment Queue", provinces: "Province-wise Assignment",
-  transfers: "Transfer Requests", coordinators: "Coordinator Management", "issue-types": "Issue Type Management",
+  transfers: "Transfer Requests", coordinators: "Coordinator Management", volunteers: "Volunteers", "issue-types": "Issue Type Management",
   analytics: "Reports & Analytics", users: "User Management", settings: "Settings", website: "Website Content", notifications: "Notifications",
 };
 export const SPECIAL_CRUMB_HREF: Record<string, string> = { cases: "/cases", assignment: "/assignment/queue" };

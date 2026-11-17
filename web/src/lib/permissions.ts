@@ -83,3 +83,5 @@ export const dashboardTitle: Record<Role, string> = {
   coordinator: "Coordinator workspace",
   handler: "My casework",
 };
+
+export const canManageVolunteers = (u: User) => u.role === "president" || u.role === "secretary";

@@ -16,8 +16,9 @@ The two parts use separate layouts and stylesheets, so styles never clash. `/rep
 | `iof_site_content` | Edit website texts, events, gallery, reports from Odoo + visual-editor API |
 | `iof_support_ticket` | Support requests with SLA and private token tracking |
 | `iof_support_case_bridge` | **New:** every website support ticket automatically becomes a case in the portal (national committee, "awaiting assignment") |
+| `otm_iof_volunteer_portal` | **New:** Volunteers menu in the portal: list/search, profile edit, approve/reject, ID card issue/print/e-mail, role assignment (volunteer → portal user, President only) |
 
-Install: `-i otm_iof_seva,iof_volunteer_registration,iof_site_content,iof_support_ticket,iof_support_case_bridge` (+ `association_membership,iof_volunteer_card` for ID cards).
+Install: `-i otm_iof_seva,iof_volunteer_registration,iof_site_content,iof_support_ticket,iof_support_case_bridge,otm_iof_volunteer_portal` (+ `association_membership,iof_volunteer_card` for ID cards).
 Tests: `--test-tags /otm_iof_seva,/iof_volunteer_registration,/iof_site_content,/iof_support_ticket,/iof_support_case_bridge` (52 tests). Web: `cd web && npm test` (74 tests).
 
 ## Run
