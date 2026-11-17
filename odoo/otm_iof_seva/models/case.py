@@ -49,6 +49,7 @@ class OtmIofCase(models.Model):
 
     # ---- Excel columns -------------------------------------------------------------------------
     sl = fields.Integer(string="SL", readonly=True, copy=False, index=True)
+    active = fields.Boolean(default=True, help="Archived by the retention job; restore from the Odoo back-end (Archived filter).")
     case_no = fields.Char(string="Case No.", readonly=True, copy=False, index=True)
     name = fields.Char(string="Case Name", required=True, tracking=True)
     summary = fields.Char(string="Short Description")
@@ -351,6 +352,17 @@ class OtmIofCase(models.Model):
     # ------------------------------------------------------------------------------------------
     # SLA escalation (cron)
     # ------------------------------------------------------------------------------------------
+    @api.model
+    def _cron_archive_closed(self):
+        """Retention: archive (never delete) closed cases older than N months. Off while the parameter is 0."""
+        months = int(self.env["ir.config_parameter"].sudo().get_param("otm_iof_seva.retention_months", "0") or 0)
+        if months <= 0:
+            return 0
+        limit = fields.Datetime.now() - timedelta(days=30 * months)
+        cases = self.sudo().search([("status", "=", "closed_finance"), ("resolved_on", "!=", False), ("resolved_on", "<", limit)])
+        cases.write({"active": False})
+        return len(cases)
+
     @api.model
     def _cron_escalate_unassigned(self):
         days = int(self.env["ir.config_parameter"].sudo().get_param("otm_iof_seva.unassigned_days", "2"))

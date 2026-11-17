@@ -68,3 +68,10 @@ Every week Secretary/President and Province Heads (with e-mail alerts on) receiv
 - Turn off: Settings → Technical → System Parameters → `otm_iof_seva.weekly_report` = `0`
 - Change day/time: Settings → Technical → Scheduled Actions → "IOF Seva: weekly case report"
 - Send a test now: open the scheduled action and click **Run Manually**. Needs an outgoing mail server.
+
+## Retention
+Closed cases are only ever **archived** (never deleted). Set `otm_iof_seva.retention_months` (System Parameters) to e.g. `24`: the weekly job "IOF Seva: archive old closed cases" then hides closed cases older than that. `0` (default) = off. Restore: Odoo back-end → Cases → Filters → Archived → Unarchive. Agree the period with IOF first.
+
+## Backups
+`scripts/backup-server.sh` dumps the database and the filestore (case documents) every night at 02:30 into `/var/backups/iof-seva`, keeping 14 days (install lines are at the top of the script). Copy that folder off the server regularly.
+Restore: `sudo -u postgres createdb demo_restore && sudo -u postgres pg_restore -d demo_restore <file>.dump`, then unpack the `.tgz` into the Odoo `filestore` folder under the new database name.

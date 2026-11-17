@@ -163,6 +163,23 @@ class TestIofSeva(TransactionCase):
         for m in new.filtered(lambda m: m.email_to == "hcp@iof.test"):
             self.assertNotIn(b"IOF-EP-Dammam", blob_of(m))
 
+    def test_retention_archives_old_closed_cases_only_when_enabled(self):
+        from datetime import timedelta
+        from odoo import fields
+        c = self._case(self.hand)
+        c.sudo().write({"status": "closed_finance"})
+        c.sudo().write({"resolved_on": fields.Datetime.now() - timedelta(days=800)})
+        fresh = self._case(self.hand)
+        fresh.sudo().write({"status": "closed_finance", "resolved_on": fields.Datetime.now()})
+        Case = self.env["otm.iof.case"]
+        self.env["ir.config_parameter"].sudo().set_param("otm_iof_seva.retention_months", "0")
+        Case._cron_archive_closed()
+        self.assertTrue(c.active)
+        self.env["ir.config_parameter"].sudo().set_param("otm_iof_seva.retention_months", "24")
+        Case._cron_archive_closed()
+        self.assertFalse(c.active)
+        self.assertTrue(fresh.active)
+
     def test_bootstrap_includes_signed_in_user_without_committee(self):
         admin = self.env.ref("base.user_admin")
         admin.group_ids = [(4, self.env.ref("otm_iof_seva.group_iof_president").id)]
