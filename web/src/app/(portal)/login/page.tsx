@@ -36,6 +36,8 @@ export default function LoginPage() {
 
   const refresh = useStore((s) => s.refresh);
   const [busy, setBusy] = useState(false);
+  const [changed, setChanged] = useState(false);
+  useEffect(() => { setChanged(new URLSearchParams(window.location.search).has("changed")); }, []);
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (USE_ODOO) {
@@ -80,6 +82,7 @@ export default function LoginPage() {
           <h2 className="font-display text-2xl font-bold">Sign in to IOF Seva</h2>
           <p className="mt-1 text-sm text-muted">Use your IOF account to manage Seva cases.</p>
 
+          {changed && <p role="status" className="mt-5 rounded-lg bg-green-50 px-3 py-2 text-sm text-green-800">Password changed. Please sign in with your new password.</p>}
           <form onSubmit={submit} className="mt-7 space-y-4" noValidate>
             <Field label="Email" required><Input type="email" autoComplete="username" value={email} onChange={(e) => { setEmail(e.target.value); setErr(""); }} placeholder="name@iof.demo" /></Field>
             <Field label="Password" required>

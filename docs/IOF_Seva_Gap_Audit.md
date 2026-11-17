@@ -66,7 +66,7 @@ Prototype covers **all 11 required flows and all 15 spec sections at UI level**.
 | G16 | No multi-language (Arabic/Hindi/Malayalam/Tamil UI) – confirm need |
 | G17 | No accessibility audit (keyboard, contrast, screen reader) beyond label fixes |
 | G18 | No automated tests (unit/e2e); only manual Playwright runs |
-| G19 | No password reset / 2FA / session timeout |
+
 | G20 | No backup/retention/GDPR-style policy for sensitive victim data |
 | G21 | Reports are on-screen only; need PDF/Excel scheduled reports per province |
 | G22 | Dashboard KPIs computed from mock; define official KPI formulas with IOF |

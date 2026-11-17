@@ -11,6 +11,28 @@ import { odoo } from "@/lib/odoo-client";
 import { Input } from "@/components/ui/form";
 import { ROLE_LABEL, provinceName } from "@/lib/reference-data";
 
+function PasswordCard() {
+  const { toast } = useToast();
+  const [o, setO] = useState(""); const [n, setN] = useState(""); const [c, setC] = useState(""); const [busy, setBusy] = useState(false);
+  const ok = o && n.length >= 10 && n === c;
+  return (
+    <Card><CardHeader title="Change password" description="At least 10 characters with upper case, lower case and a number" />
+      <CardBody>
+        <form className="space-y-3" onSubmit={async (e) => {
+          e.preventDefault(); setBusy(true);
+          try { await odoo("change_my_password", o, n); await fetch("/api/auth/logout", { method: "POST" }).catch(() => null); window.location.href = "/login?changed=1"; }
+          catch (er) { toast({ kind: "error", title: (er as Error).message }); } finally { setBusy(false); }
+        }}>
+          <Input type="password" autoComplete="current-password" aria-label="Current password" placeholder="Current password" value={o} onChange={(e) => setO(e.target.value)} />
+          <Input type="password" autoComplete="new-password" aria-label="New password" placeholder="New password" value={n} onChange={(e) => setN(e.target.value)} />
+          <Input type="password" autoComplete="new-password" aria-label="Confirm new password" placeholder="Confirm new password" value={c} onChange={(e) => setC(e.target.value)} />
+          {c && n !== c && <p className="text-xs text-red-600">Passwords do not match.</p>}
+          <Button type="submit" disabled={!ok || busy}>Change password</Button>
+        </form>
+      </CardBody></Card>
+  );
+}
+
 export default function SettingsPage() {
   const me = useCurrentUser()!;
   const reset = useStore((s) => s.resetDemo);
@@ -32,6 +54,7 @@ export default function SettingsPage() {
       <div className="space-y-5">
         <Card><CardHeader title="Profile" /><CardBody className="flex items-center gap-4"><Avatar name={me.name} size={56} /><div><p className="font-display text-lg font-bold">{me.name}</p><p className="text-sm text-muted">{ROLE_LABEL[me.role]} · {provinceName(me.provinceCode)}</p><p className="text-sm text-muted">{me.email} · {me.phone}</p></div></CardBody></Card>
         <Card><CardHeader title="Notifications" description="Choose what appears in your notification centre" /><CardBody className="divide-y divide-line py-2">{(Object.keys(prefs) as (keyof typeof prefs)[]).map((k) => <label key={k} className="flex items-center justify-between py-3 text-sm">{labels[k]}<Switch checked={prefs[k]} onChange={(v) => setPrefs({ ...prefs, [k]: v })} label={labels[k]} /></label>)}</CardBody></Card>
+        {USE_ODOO && <PasswordCard />}
         {USE_ODOO && <Card><CardHeader title="My alerts" description="Receive case alerts by email and WhatsApp (no victim details are ever sent)" /><CardBody className="space-y-3">
           <label className="flex items-center justify-between text-sm">Email alerts<Switch checked={my.email} onChange={(v) => saveMy({ ...my, email: v })} label="Email alerts" /></label>
           <label className="flex items-center justify-between text-sm">WhatsApp alerts<Switch checked={my.whatsapp} onChange={(v) => saveMy({ ...my, whatsapp: v })} label="WhatsApp alerts" /></label>

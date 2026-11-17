@@ -7,7 +7,7 @@ import base64
 import re
 
 from odoo import api, fields, models
-from odoo.exceptions import AccessError, UserError
+from odoo.exceptions import AccessDenied, AccessError, UserError
 
 from .case import EXTERNAL_SOURCES
 from .case_event import USER_EVENT_TYPES
@@ -494,6 +494,19 @@ class OtmIofApi(models.AbstractModel):
         if not (prefix or "").strip():
             raise UserError(self.env._("Prefix cannot be empty."))
         self._committee(code).sudo().case_prefix = prefix.strip().upper()
+        return True
+
+    @api.model
+    def change_my_password(self, old, new):
+        new = (new or "").strip()
+        if len(new) < 10 or new.lower() == new or new.upper() == new or not any(c.isdigit() for c in new):
+            raise UserError(self.env._("New password: at least 10 characters with upper case, lower case and a number."))
+        if new == old:
+            raise UserError(self.env._("New password must be different from the old one."))
+        try:
+            self.env["res.users"].change_password(old, new)
+        except AccessDenied:
+            raise UserError(self.env._("Current password is wrong.")) from None
         return True
 
     @api.model

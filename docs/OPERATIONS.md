@@ -54,3 +54,7 @@ Deletion/anonymisation should be run by a President-approved scheduled action; c
 
 ## Merged public site (Phase 8)
 The public website (volunteer registration, support tickets, CMS, visual editor) comes from the separate "iof-seva1" build; see `docs/DEPLOYMENT_SITE.md` and `docs/VOLUNTEER_API.md`. The old simple Website CMS and `/report` form of the portal were removed; `/support` replaces `/report`. Required system parameter: none new; `otm_iof_seva.public_key` is no longer used.
+
+## Passwords
+- Every user can change their own password in **Settings → Change password** (10+ chars, upper, lower, number). They are signed out afterwards.
+- Forgotten password: the President resets it in **User Management** (edit user → set a new password).
