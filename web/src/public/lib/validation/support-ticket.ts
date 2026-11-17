@@ -22,11 +22,11 @@ export const supportTicketSchema = z.object({
   email: z.preprocess((v) => String(clean(v)).toLowerCase(), z.string().min(1, "This field is required").max(254).email("Enter a valid email address")),
   mobile: z.preprocess(clean, z.string().regex(/^\+?[0-9][0-9\s\-()]{6,19}$/, "Enter a valid phone number")),
   city: text(80),
-  category: z.preprocess(clean, z.enum(CATEGORIES.map(([k]) => k) as [string, ...string[]], { errorMap: () => ({ message: "Choose a category" }) })),
-  urgency: z.preprocess(clean, z.enum(URGENCY.map(([k]) => k) as [string, ...string[]], { errorMap: () => ({ message: "Choose how urgent this is" }) })),
+  category: z.preprocess(clean, z.enum(CATEGORIES.map(([k]) => k) as [string, ...string[]], { error: "Choose a category" })),
+  urgency: z.preprocess(clean, z.enum(URGENCY.map(([k]) => k) as [string, ...string[]], { error: "Choose how urgent this is" })),
   subject: text(150, true),
   description: text(4000, true),
-  consent: z.literal(true, { errorMap: () => ({ message: "Please confirm that we may contact you about this request" }) }),
+  consent: z.literal(true, { error: "Please confirm that we may contact you about this request" }),
 });
 export const supportSubmissionSchema = supportTicketSchema.extend({ website: z.string().max(0).optional() });
 export type SupportTicketInput = z.input<typeof supportTicketSchema>;
