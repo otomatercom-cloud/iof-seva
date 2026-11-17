@@ -17,7 +17,7 @@ export default function DashboardPage() {
   const m = S?.monthly ?? [], prov = S?.byProvince ?? [], iss = S?.byIssue ?? [], st = S?.byStatus ?? [];
 
   const reg = regionOf(me.provinceCode)!;
-  const scope = { president: "All provinces", secretary: "All provinces", province_head: `${REGIONS[reg].name}`, coordinator: me.provinceCode, handler: "Assigned to you" }[me.role];
+  const scope = { president: "All provinces", secretary: "All provinces", province_head: `${REGIONS[reg]?.name ?? ""}`, coordinator: me.provinceCode, handler: "Assigned to you" }[me.role];
   const desc = {
     president: "Live picture of every province, assignment bottleneck and critical case.",
     secretary: "Live picture of every province, assignment bottleneck and critical case.",
