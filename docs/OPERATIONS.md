@@ -58,3 +58,7 @@ The public website (volunteer registration, support tickets, CMS, visual editor)
 ## Passwords
 - Every user can change their own password in **Settings → Change password** (10+ chars, upper, lower, number). They are signed out afterwards.
 - Forgotten password: the President resets it in **User Management** (edit user → set a new password).
+
+## Deploying an update
+`sudo /opt/iof-seva/scripts/deploy-server.sh [-i new_modules] [-m updated_modules]`
+When Odoo modules change the script stops the `elysians` service, updates the modules, starts it again, then builds and restarts the web app.
