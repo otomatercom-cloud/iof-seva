@@ -117,3 +117,22 @@ Confirm Section 5 questions 1–4, then start **Phase 1 + 2 as one Odoo module (
 - **→ Closed – Including Finance**: Province Head, Secretary or President only, after finance entries are reviewed; case locked afterwards.
 - **Reopen a Closed case**: President only (reason logged).
 - No skipping from Open straight to Closed.
+
+---
+## 9. Status on 2026-11-17 (after build)
+| Gap | Status |
+|---|---|
+| G1–G7 (auth, security, persistence, documents, remarks, audit trail, case no.) | ✅ Done (Odoo 19, server-side) |
+| G8 duplicate detection · G10 server paging · G11 transfer rules · G12 status matrix · G13 Excel import | ✅ Done |
+| G9 notifications | ✅ In-app, e-mail, WhatsApp outbox + overdue cron. ⏳ Real WhatsApp gateway (Meta) pending; relay in `docs/whatsapp-relay` |
+| G14 public intake · G15 website CMS + visual editor | ✅ Done (support ticket → case bridge) |
+| G18 tests | ✅ 53 Odoo + 74 web tests |
+| G19 password | ✅ Self-service change + President reset. ⏳ E-mail reset (needs SMTP), 2FA not built |
+| G20 retention / backup | ✅ Archive-only retention (off until IOF sets period) + nightly backup script |
+| G21 reports | ✅ Weekly Excel by e-mail. ⏳ PDF reports not built |
+| G17 accessibility | ⚠️ axe fixes done, full audit pending |
+| G16 Arabic / Malayalam UI | ❌ Not built |
+| G22 KPI formulas · G23 typed timeline | ⚠️ Need IOF input / partly done |
+| Extra | Volunteers management in portal (approve, ID card, role assignment), add province, hero/about photo editing |
+
+Open client questions: cross-province assignment rule (assumed, unconfirmed), Province Head per region vs committee, SLA targets, retention period, official KPIs, status buckets.
